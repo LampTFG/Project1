@@ -64,7 +64,7 @@ public class Welcome extends Activity implements Runnable{
         XMLParser xml = new XMLParser(response);
 		itemList = xml.getItemList();
 		xml.parse();
-		
+		//
 		String webText = "erro na leitura" ; 
 		if(itemList.size()>0)
 			webText = itemList.get(0).getLogin();
