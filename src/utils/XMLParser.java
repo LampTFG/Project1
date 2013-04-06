@@ -18,8 +18,6 @@ import android.util.Log;
 //Extend the class with Default Handler
 
 public class XMLParser extends DefaultHandler {
-	// You must have basic knowledge about Array List and setter/getter methods
-	// This is where the data will be stored
 	ArrayList<User> itemsList = new ArrayList<User>();
 	User item;
 	String data;
@@ -65,8 +63,6 @@ public class XMLParser extends DefaultHandler {
 		}
 
 		if (itemsList != null && itemsList.size() > 0) {
-			// //Log.d("Array List Size",""+tipsList.get(4).getTitle());
-
 			return 1;
 		} else {
 			return 0;
@@ -78,7 +74,6 @@ public class XMLParser extends DefaultHandler {
 		return itemsList;
 	}
 
-	// Here you can check for the xml Tags
 	@Override
 	public void startElement(String uri, String localName, String qName,
 			Attributes attributes) throws SAXException {
@@ -89,8 +84,6 @@ public class XMLParser extends DefaultHandler {
 
 	}
 
-	// tempVal is the variable which stores text temporarily and you
-	// may save the data in arraylists
 	public void characters(char[] ch, int start, int length)
 			throws SAXException {
 		tempVal = new String(ch, start, length);
@@ -103,9 +96,7 @@ public class XMLParser extends DefaultHandler {
 		if (localName.equalsIgnoreCase("firstname")) {
 			itemsList.add(item);
 			Log.d("Working in endelement", "+++++++++++++++++++++++");
-			
 			item.setLogin(tempVal);
-
 		}
 	}
 }
