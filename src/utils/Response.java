@@ -22,14 +22,12 @@ public class Response {
 
 	public String getResponse() {
 		InputStream in = null;
-		byte[] data = new byte[1000];
 		try {
 			URL url = new URL(get_url);
 			URLConnection conn = url.openConnection();
 			conn.connect();
 			/* conn. */
 			in = conn.getInputStream();
-			Log.d("Buffer Size +++++++++++++", "" + in.toString().length());
 			BufferedReader rd = new BufferedReader(new InputStreamReader(in),
 					in.toString().length());
 			String line;
@@ -40,13 +38,8 @@ public class Response {
 			rd.close();
 			response = sb.toString();
 
-			in.read(data);
-			Log.d("INPUT STREAM PROFILE RESPONSE", response);
-			in.close();
 		} catch (IOException e1) {
 			Log.d("CONNECTION  ERROR", "+++++++++++++++++++++++++++");
-			// TODO Auto-generated catch block
-
 			e1.printStackTrace();
 		}
 		return response;
