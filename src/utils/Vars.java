@@ -7,7 +7,7 @@ public class Vars {
 	
 	public static String wsServer = "http://192.168.1.107";
 	public static String wsCustomersPath = "store/api/customers";
-	public static String wsProductPath = "store/api/product";
+	public static String wsProductPath = "store/api/products";
 	
 	//
 	
