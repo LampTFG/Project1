@@ -39,7 +39,7 @@ public class Response {
 			response = sb.toString();
 
 		} catch (IOException e1) {
-			Log.d("CONNECTION  ERROR", "+++++++++++++++++++++++++++");
+			Log.d("CONNECTION  ERROR", "+++++++++++++IOException++++++++++++++");
 			e1.printStackTrace();
 		}
 		return response;
