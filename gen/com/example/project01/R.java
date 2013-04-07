@@ -26,8 +26,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int lampada_quebrada=0x7f020001;
     }
     public static final class id {
-        public static final int btnBackWelcome=0x7f07000f;
+        public static final int btnBackWelcome=0x7f070012;
+        public static final int btnCart=0x7f070011;
         public static final int btnConfirmar=0x7f07000c;
+        public static final int btnHistory=0x7f070010;
+        public static final int btnScan=0x7f07000f;
         public static final int dummy_button=0x7f070002;
         public static final int edtPass=0x7f07000b;
         public static final int edtUser=0x7f070008;
