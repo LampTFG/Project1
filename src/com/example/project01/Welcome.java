@@ -61,4 +61,19 @@ public class Welcome extends Activity implements Runnable{
 		respText = xml.getResp();
 		notifyAll();
 	}
+	
+	public void checkHistory(View v){
+		Intent i = new Intent(Views.historyIntent);
+		startActivity(i);
+	}
+	
+	public void checkCart(View v){
+		Intent i = new Intent(Views.shoppingCartIntent);
+		startActivity(i);
+	}
+	
+	public void scanQRCode(View v){
+		Intent i = new Intent(Views.scanIntent);
+		startActivity(i);
+	}
 }

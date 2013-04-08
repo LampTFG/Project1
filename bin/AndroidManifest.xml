@@ -45,16 +45,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.project01.Scan_screen"
+            android:name="com.example.project01.ScanScreen"
             android:label="@string/title_activity_scan_screen" >
+            <intent-filter>
+                <action android:name="com.example.project01.ScanScreen" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.example.project01.HistoryScreen"
             android:label="@string/title_activity_history_screen" >
+            <intent-filter>
+                <action android:name="com.example.project01.HistoryScreen" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.example.project01.ShoppingCart"
             android:label="@string/title_activity_shopping_cart" >
+            <intent-filter>
+                <action android:name="com.example.project01.ShoppingCart" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -1,7 +1,75 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFE0"
-    android:orientation="vertical" >
-</LinearLayout>
+    tools:context=".ScanScreen" >
+
+    <Button
+        android:id="@+id/scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="36dp"
+        android:onClick="onClick"
+        android:text="Scan" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/scan"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="34dp"
+        android:text="BarCode" />
+
+    <EditText
+        android:id="@+id/barCodeEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/typEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/barCodeEdit"
+        android:layout_marginTop="35dp"
+        android:layout_toRightOf="@+id/scan"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/typ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/typEdit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/typEdit"
+        android:text="Typ" />
+
+    <EditText
+        android:id="@+id/encodeEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/typEdit"
+        android:layout_marginTop="84dp"
+        android:layout_toRightOf="@+id/scan"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/encodebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/encodeEdit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="encode"
+        android:onClick="onClickEncode" />
+
+</RelativeLayout>

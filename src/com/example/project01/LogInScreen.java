@@ -1,5 +1,6 @@
 package com.example.project01;
 
+import utils.Views;
 import model.User;
 import controller.CtrLogin;
 import android.app.Activity;
@@ -22,7 +23,7 @@ public class LogInScreen extends Activity{
 		String edtPass = ((EditText) findViewById(R.id.edtPass)).getText().toString();
 		User u = new User(edtUser, edtPass);
 		CtrLogin ctr = new CtrLogin();
-		Intent i = new Intent("com.example.project01.welcome");
+		Intent i = new Intent(Views.welcomeIntent);
 		if(ctr.validaUser(getApplicationContext(), u)){
 			i.putExtra("confirmation", true);
 			i.putExtra("userName", edtUser);
