@@ -46,8 +46,14 @@ public class ScanScreen extends Activity implements Runnable{
 	    	  ebarcode.setText(barcord);
 	    	  etyp.setText(typ);
 	    	  prodID = barcord.substring(4);
-	    	  Thread t = new Thread();
-	    	  t.start();
+	    	  try {
+	    		  Thread t = new Thread();
+		    	  t.start();
+		    	  wait();
+	    	  } catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    	  
     	  }
     	}
