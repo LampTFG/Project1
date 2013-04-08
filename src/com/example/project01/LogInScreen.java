@@ -23,10 +23,12 @@ public class LogInScreen extends Activity{
 		User u = new User(edtUser, edtPass);
 		CtrLogin ctr = new CtrLogin();
 		Intent i = new Intent("com.example.project01.welcome");
-		if(ctr.validaUser(getApplicationContext(), u))
+		if(ctr.validaUser(getApplicationContext(), u)){
 			i.putExtra("confirmation", true);
-		else
+			i.putExtra("userName", edtUser);
+		}else{
 			i.putExtra("confirmation", false);
+		}
 		LogInScreen.this.startActivity(i);
 		LogInScreen.this.finish();
     }

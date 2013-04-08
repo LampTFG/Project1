@@ -22,9 +22,11 @@ public class Welcome extends Activity implements Runnable{
 		try {
 			Intent i = getIntent();
 			TextView resp = (TextView) findViewById(R.id.txtResp);
-			if(i.getExtras().getBoolean("confirmation"))
+			TextView greeting = (TextView) findViewById(R.id.greeting);
+			if(i.getExtras().getBoolean("confirmation")){
 				resp.setText("PARABENSSSSSSSSSSS");
-			else
+				greeting.setText("Welcome "+ i.getExtras().getString("userName"));
+			}else
 				resp.setText("ERROUUUUUUUUUU");
 
 			progressDialog = ProgressDialog.show(this, "WebService","Por favor, Aguarde...",true,false);
