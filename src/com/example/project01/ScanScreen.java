@@ -40,7 +40,7 @@ public class ScanScreen extends Activity implements Runnable{
     }
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
     	  IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-    	  if (scanResult != null) {
+    	  if (scanResult != null && scanResult.getContents()!=null) {
     		  String barcord = scanResult.getContents();
     		  String typ = scanResult.getFormatName();
 	    	  EditText ebarcode = (EditText) findViewById(R.id.barCodeEdit);
@@ -55,8 +55,11 @@ public class ScanScreen extends Activity implements Runnable{
 	    	  } catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-	    	  
+	    	  }
+    	  }else{
+				Intent i = new Intent(Views.welcomeIntent);
+				ScanScreen.this.startActivity(i);
+				ScanScreen.this.finish();  
     	  }
     	}
     @Override

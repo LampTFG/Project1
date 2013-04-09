@@ -7,7 +7,6 @@ import utils.Vars;
 import utils.Views;
 import utils.XMLParser;
 import utils.session.App;
-import utils.session.SessionManager;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -21,15 +20,14 @@ public class Welcome extends Activity implements Runnable{
 	@Override
 	protected synchronized void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		SessionManager session = new SessionManager(getApplicationContext());
 		setContentView(R.layout.telaboasvindas);
 		
 		try {
 			TextView resp = (TextView) findViewById(R.id.txtResp);
 			TextView greeting = (TextView) findViewById(R.id.greeting);
-			if(session.getUserDetails().get(SessionManager.KEY_USERNAME) != null){
+			if(App.getUsername() != null){
 				resp.setText("PARABENSSSSSSSSSSS");
-				greeting.setText("Welcome "+ " "+session.getUserDetails().get(SessionManager.KEY_USERNAME)+" "+App.getUsername());
+				greeting.setText("Welcome "+ " "+App.getUsername());
 			}else
 				resp.setText("ERROUUUUUUUUUU");
 
