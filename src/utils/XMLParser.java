@@ -31,11 +31,13 @@ public class XMLParser extends DefaultHandler {
 		SAXParser sp = null;
 		InputStream inputStream = null;
 		try {
-			inputStream = new ByteArrayInputStream(data.getBytes());
-			spf = SAXParserFactory.newInstance();
-			if (spf != null) {
-				sp = spf.newSAXParser();
-				sp.parse(inputStream, this);
+			if(data!=null){
+				inputStream = new ByteArrayInputStream(data.getBytes());
+				spf = SAXParserFactory.newInstance();
+				if (spf != null) {
+					sp = spf.newSAXParser();
+					sp.parse(inputStream, this);
+				}
 			}
 		}
 		catch (Exception e) {

@@ -55,7 +55,7 @@ public class Welcome extends Activity implements Runnable{
 
 	@Override
 	public synchronized void run() {
-		Response res = new Response(Vars.wsServer+"/"+Vars.wsProductPath+"/3?ws_key="+Vars.wsKey);
+		Response res = new Response("http://"+Vars.wsServer+"/"+Vars.wsProductPath+"/3?ws_key="+Vars.wsKey);
         String response = res.getResponse();
         XMLParser xml = new XMLParser(response, "name");
         xml.parse();
