@@ -82,6 +82,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class string {
         public static final int action_settings=0x7f060004;
         public static final int app_name=0x7f060000;
+        public static final int btn_back=0x7f060008;
         public static final int hello_world=0x7f060005;
         public static final int splash=0x7f060002;
         public static final int start_button=0x7f060001;

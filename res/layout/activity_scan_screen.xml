@@ -79,6 +79,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
         android:text="Back"
-        android:onClick="back" />
+        android:onClick="@string/btn_back" />
 
 </RelativeLayout>

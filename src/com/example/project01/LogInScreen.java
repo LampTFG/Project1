@@ -3,7 +3,6 @@ package com.example.project01;
 
 import utils.Views; 
 import utils.session.App;
-import utils.session.SessionManager;
 import model.User;
 import controller.CtrLogin;
 import android.app.Activity;
@@ -16,9 +15,6 @@ import android.widget.EditText;
 
 public class LogInScreen extends Activity{
 
-	// Session Manager Class
-    SessionManager session;
-    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,7 +24,6 @@ public class LogInScreen extends Activity{
 	//user validation
 	public void checkLogin(View v){
 		// Session Manager
-        session = new SessionManager(getApplicationContext());
         // Edits
     	String edtUser = ((EditText) findViewById(R.id.edtUser)).getText().toString();
 		String edtPass = ((EditText) findViewById(R.id.edtPass)).getText().toString();
@@ -36,10 +31,9 @@ public class LogInScreen extends Activity{
 		CtrLogin ctr = new CtrLogin();
 		Intent i = new Intent(Views.welcomeIntent);
 		if(ctr.validaUser(getApplicationContext(), u)){
-			session.createLoginSession(edtUser);
 			App.setUsername(edtUser);
 		}
-		if(session.isLoggedIn()){
+		if(App.isLoged()){
 			LogInScreen.this.startActivity(i);
 			LogInScreen.this.finish();
 		}else{

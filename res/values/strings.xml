@@ -9,5 +9,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_history_screen">HistoryScreen</string>
     <string name="title_activity_shopping_cart">ShoppingCart</string>
+    
+    <string name="btn_back">Back</string>
 
 </resources>

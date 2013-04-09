@@ -41,4 +41,8 @@ public class App extends Application {
 	public static void setCart(ShoppingCart cart) {
 		App.cart = cart;
 	}
+	
+	public static boolean isLoged(){
+		return (username!=null && !username.equals(""));
+	}
 }

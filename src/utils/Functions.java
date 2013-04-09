@@ -1,5 +1,9 @@
 package utils;
 
+import com.example.project01.ShoppingCart;
+
+import utils.session.App;
+
 public class Functions {
 
 	public static String urlConcat(String ... strings ){
@@ -9,5 +13,11 @@ public class Functions {
 		}
 		resp += strings[strings.length-1];
 		return resp;
+	}
+
+	public static void logOut() {
+		App.setPassword("");
+		App.setUsername("");
+		App.setCart(new ShoppingCart());
 	}
 }
