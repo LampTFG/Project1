@@ -2,6 +2,7 @@ package com.example.project01;
 
 import utils.Response;
 import utils.Vars;
+import utils.Views;
 import utils.XMLParser;
 import zxingHelpers.IntentIntegrator;
 import zxingHelpers.IntentResult;
@@ -66,7 +67,12 @@ public class ScanScreen extends Activity implements Runnable{
         xml.parse();
 		respText = xml.getResp();
 		notifyAll();
-		
+	}
+	
+	public void back(View v){
+		Intent i = new Intent(Views.welcomeIntent);
+		ScanScreen.this.startActivity(i);
+		ScanScreen.this.finish();
 	}
     
 }

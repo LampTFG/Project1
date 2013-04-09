@@ -71,5 +71,14 @@
         android:layout_marginTop="14dp"
         android:text="encode"
         android:onClick="onClickEncode" />
+    
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="Back"
+        android:onClick="back" />
 
 </RelativeLayout>

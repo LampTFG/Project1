@@ -37,6 +37,10 @@ public class DBConn extends SQLiteOpenHelper {
 		values.put(FIELD_LOGIN, "thiago");
 		values.put(FIELD_PASS, "thiago");
 		db.insert(TABLE_NAME, null, values);
+		//t
+		values.put(FIELD_LOGIN, "t");
+		values.put(FIELD_PASS, "");
+		db.insert(TABLE_NAME, null, values);
 	}
 
 	@Override
