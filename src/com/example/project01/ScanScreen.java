@@ -1,5 +1,6 @@
 package com.example.project01;
 
+import utils.Functions;
 import utils.Response;
 import utils.Vars;
 import utils.Views;
@@ -67,7 +68,7 @@ public class ScanScreen extends Activity implements Runnable{
 
 	@Override
 	public void run() {
-		Response res = new Response(Vars.wsServer+"/"+Vars.wsProductPath+"/"+prodID+"?ws_key="+Vars.wsKey);
+		Response res = new Response(Functions.urlConcat(Vars.wsServer,Vars.wsProductPath,prodID+"?ws_key="+Vars.wsKey));
         String response = res.getResponse();
         XMLParser xml = new XMLParser(response, "name");
         xml.parse();

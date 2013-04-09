@@ -23,6 +23,7 @@ public class Response {
 	public String getResponse() {
 		InputStream in = null;
 		try {
+			System.out.println("tentando acessar "+get_url);
 			URL url = new URL(get_url);
 			URLConnection conn = url.openConnection();
 			conn.connect();
