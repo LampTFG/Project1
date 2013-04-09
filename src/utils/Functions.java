@@ -20,4 +20,23 @@ public class Functions {
 		App.setUsername("");
 		App.setCart(new ShoppingCart());
 	}
+	
+	public static String productEncrypt(int productId){
+		return "Lamp_"+productId;
+	}
+	
+	public static boolean isCodeValid(String code){
+		boolean resp = true;
+		resp = code.startsWith("Lamp_");
+		try{
+			Integer.parseInt(code.replaceFirst("Lamp_", ""));
+		}catch (Exception e) {
+			resp =false;
+		}
+		return resp;
+	}
+	
+	public static int productDecrypt(String code){
+		return Integer.parseInt(code.replace("Lamp_", ""));
+	}
 }

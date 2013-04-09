@@ -1,5 +1,6 @@
 package com.example.project01;
 
+import utils.DialogManager;
 import utils.Functions;
 import utils.Response;
 import utils.Vars;
@@ -9,14 +10,12 @@ import utils.session.App;
 import zxingHelpers.IntentIntegrator;
 import zxingHelpers.IntentResult;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 public class Welcome extends Activity implements Runnable {
-	ProgressDialog progressDialog;
 	String respText;
 	String prodID;
 
@@ -34,8 +33,6 @@ public class Welcome extends Activity implements Runnable {
 			} else
 				resp.setText("ERROUUUUUUUUUU");
 
-			progressDialog = ProgressDialog.show(this, "WebService",
-					"Por favor, Aguarde...", true, false);
 			Thread t = new Thread(this);
 			t.start();
 			wait();
@@ -43,7 +40,6 @@ public class Welcome extends Activity implements Runnable {
 			webText = respText;
 			TextView text = (TextView) findViewById(R.id.textURL);
 			text.setText(webText);
-			progressDialog.dismiss();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,10 +92,15 @@ public class Welcome extends Activity implements Runnable {
 			String barcord = scanResult.getContents();
 			String type = scanResult.getFormatName();
 			System.out.println("Type: " + type);
-			prodID = barcord.substring(4);
+			prodID = barcord;
 			System.out.println("Value: " + prodID);
-			//redirects to Product Screen
+			if(Functions.isCodeValid(prodID)){
+				System.out.println("Codigo Valido: "+Functions.productDecrypt(prodID));
+				//redirects to Product Screen
 				//please, implement it
+			}else{
+				DialogManager.showErrorMessage(this, "Erro", "QR Invalid");
+			}
 		} else {
 			Intent i = new Intent(Views.welcomeIntent);
 			Welcome.this.startActivity(i);

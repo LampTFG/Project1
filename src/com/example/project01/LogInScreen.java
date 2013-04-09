@@ -1,13 +1,12 @@
 package com.example.project01;
 
 
+import utils.DialogManager;
 import utils.Views; 
 import utils.session.App;
 import model.User;
 import controller.CtrLogin;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -37,16 +36,7 @@ public class LogInScreen extends Activity{
 			LogInScreen.this.startActivity(i);
 			LogInScreen.this.finish();
 		}else{
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage("Wrong password")
-					.setTitle("Erro")
-					.setCancelable(true)
-					.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-				           public void onClick(DialogInterface dialog, int id) {
-				        	   dialog.dismiss();
-				           }
-				       });
-			builder.show();
+			DialogManager.showErrorMessage(this, "Erro", "Wrong username or password");
 		}
     }
 }
