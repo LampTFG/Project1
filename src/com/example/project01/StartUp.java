@@ -1,5 +1,7 @@
 package com.example.project01;
 
+import utils.Views;
+
 import com.example.project01.util.SystemUiHider;
 
 import controller.CtrStartUp;
@@ -169,7 +171,7 @@ public class StartUp extends Activity {
 		ctr.populate();
 		ctr.close();
 		//redirects to the logIn Screen
-		Intent i = new Intent("com.example.project01.LogInScreen");
+		Intent i = new Intent(Views.loginIntent);
 		StartUp.this.startActivity(i);
 		StartUp.this.finish();
 	}

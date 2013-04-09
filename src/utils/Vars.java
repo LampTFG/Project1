@@ -1,8 +1,9 @@
 package utils;
 
+//global vars
 public class Vars {
 
-	//WebService
+	//ws - WebService
 	public static String wsKey = "4OZ72NAAOCD3ZYWYCOENYIBGU3HU3F39";
 	
 	public static String wsServer = "192.168.1.107";
