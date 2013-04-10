@@ -2,11 +2,9 @@ package com.example.project01;
 
 import java.util.ArrayList;
 
-import model.Cart;
 import model.ShopItem;
 import utils.FunctionsView;
 import utils.Views;
-import utils.session.App;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -60,7 +58,7 @@ public class HistoryScreen extends Activity {
         //list.add(new ShopItem(2, 6));
         //
         
-        if(list!=null){
+        if(list!=null && list.size()>0){
 	        for (int i=0;i< list.size(); i++) {
 	        	tr = new TableRow(this);
 	        	tr.setLayoutParams(tableParams);
