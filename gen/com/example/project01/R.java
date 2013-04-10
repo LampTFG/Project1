@@ -41,14 +41,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int shopping_cart_racing=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f09001f;
+        public static final int action_settings=0x7f09001d;
         public static final int barCodeEdit=0x7f090004;
         public static final int btnBack=0x7f090001;
-        public static final int btnBackWelcome=0x7f09001b;
-        public static final int btnCart=0x7f09001e;
+        public static final int btnBackWelcome=0x7f090019;
+        public static final int btnCart=0x7f09001c;
         public static final int btnConfirmar=0x7f090016;
-        public static final int btnHistory=0x7f09001d;
-        public static final int btnScan=0x7f09001c;
+        public static final int btnHistory=0x7f09001b;
+        public static final int btnScan=0x7f09001a;
         public static final int dummy_button=0x7f09000c;
         public static final int edtPass=0x7f090015;
         public static final int edtUser=0x7f090012;
@@ -56,8 +56,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int encodebtn=0x7f090008;
         public static final int fullscreen_content=0x7f09000a;
         public static final int fullscreen_content_controls=0x7f09000b;
-        public static final int gallery1=0x7f090017;
-        public static final int greeting=0x7f090019;
+        public static final int greeting=0x7f090017;
         public static final int imageView1=0x7f09000d;
         public static final int lblLoginScreen=0x7f09000f;
         public static final int lblPass=0x7f090014;
@@ -69,8 +68,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int shoppingCartTitle=0x7f090003;
         public static final int tableHistory=0x7f090000;
         public static final int tableShoppingCart=0x7f090009;
-        public static final int textURL=0x7f09001a;
-        public static final int textView1=0x7f090018;
+        public static final int textURL=0x7f090018;
         public static final int typ=0x7f090006;
         public static final int typEdit=0x7f090005;
     }
@@ -80,8 +78,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_shopping_cart=0x7f030002;
         public static final int activity_start_up=0x7f030003;
         public static final int login_screen=0x7f030004;
-        public static final int product_screen=0x7f030005;
-        public static final int telaboasvindas=0x7f030006;
+        public static final int telaboasvindas=0x7f030005;
     }
     public static final class menu {
         public static final int history_screen=0x7f080000;

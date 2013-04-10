@@ -23,7 +23,9 @@ public class Cart {
 	public void addItem(int idProd, int qtd){
 		cart.add(new ShopItem(idProd, qtd));
 	}
-	
+	public void addItem(ShopItem si){
+		cart.add(si);
+	}
 	public void editItem(int idProd, int qtd){
 		for (ShopItem si : cart) {
 			if(si.getIdProd()==idProd){
