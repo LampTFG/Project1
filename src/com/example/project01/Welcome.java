@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class Welcome extends Activity implements Runnable {
 	String respText;
-	String prodID;
+	String barcord;
 
 	@Override
 	protected synchronized void onCreate(Bundle savedInstanceState) {
@@ -84,14 +84,12 @@ public class Welcome extends Activity implements Runnable {
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+		System.out.println("dddd "+resultCode);
 		if (scanResult != null && scanResult.getContents() != null) {
-			String barcord = scanResult.getContents();
-			String type = scanResult.getFormatName();
-			System.out.println("Type: " + type);
-			prodID = barcord;
-			System.out.println("Value: " + prodID);
-			if(Functions.isCodeValid(prodID)){
-				System.out.println("Codigo Valido: "+Functions.productDecrypt(prodID));
+			barcord = scanResult.getContents();
+			System.out.println("Value: " + barcord);
+			if(Functions.isCodeValid(barcord)){
+				System.out.println("Codigo Valido: "+Functions.productDecrypt(barcord));
 				//redirects to Product Screen
 				//please, implement it
 			}else{
