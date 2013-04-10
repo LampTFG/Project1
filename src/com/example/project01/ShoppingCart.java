@@ -78,11 +78,7 @@ public class ShoppingCart extends Activity {
 	            tl.addView(tr,tableParams);
 	        }
         }else{
-        	tr = new TableRow(this);
-        	tr.setLayoutParams(tableParams);
-        	//
-        	tv = FunctionsView.makeTableView(this,getString(R.string.emptyTable));
-            tr.addView(tv);
+        	tr = FunctionsView.getEmptyRow(this);
         	tl.addView(tr, tableParams);
         }
 	}

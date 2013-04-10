@@ -16,5 +16,6 @@
     <string name="headerName">Name</string>
     <string name="headerQuantity">Qt.</string>
     <string name="headerPrice">Price</string>
+    <string name="headerDate">Date</string>
 
 </resources>

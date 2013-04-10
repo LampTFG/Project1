@@ -1,6 +1,7 @@
 package utils;
 
 import android.app.Activity;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TableRow.LayoutParams;
 
@@ -52,5 +53,21 @@ public class FunctionsView {
 	 */
 	public static TextView makeTableView(Activity ac, String text){
 		return makeTableView(ac, text, 0);
+	}
+
+
+	/**
+	 * Make a emptyRow
+	 *
+	 * @param ac		activity where the table will be show
+	 * @return          emptyRow, default empty message
+	 */
+	public static TableRow getEmptyRow(Activity ac) {
+		LayoutParams tableParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		TableRow tr = new TableRow(ac);
+    	tr.setLayoutParams(tableParams);
+    	TextView tv = FunctionsView.makeTableView(ac,ac.getString(R.string.emptyTable));
+        tr.addView(tv);
+		return tr;
 	}
 }

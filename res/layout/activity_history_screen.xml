@@ -4,11 +4,26 @@
     android:layout_height="match_parent"
     android:background="#FFFFE0"
     android:orientation="vertical" >
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="@string/btn_back"
-        android:onClick="back" />
+    
+    <TableLayout 
+	    android:id="@+id/tableHistory" 
+	    android:layout_height="wrap_content" 
+	    android:layout_width="match_parent">
+	</TableLayout>
+	
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:onClick="back"
+            android:text="@string/btn_back" />
+
+    </LinearLayout>
 </LinearLayout>

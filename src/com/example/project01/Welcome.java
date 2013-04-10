@@ -25,13 +25,9 @@ public class Welcome extends Activity implements Runnable {
 		setContentView(R.layout.telaboasvindas);
 
 		try {
-			TextView resp = (TextView) findViewById(R.id.txtResp);
 			TextView greeting = (TextView) findViewById(R.id.greeting);
-			if (App.getUsername() != null) {
-				resp.setText("PARABENSSSSSSSSSSS");
+			if (App.getUsername() != null) 
 				greeting.setText("Welcome " + " " + App.getUsername());
-			} else
-				resp.setText("ERROUUUUUUUUUU");
 
 			Thread t = new Thread(this);
 			t.start();
