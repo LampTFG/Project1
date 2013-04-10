@@ -6,17 +6,9 @@ import android.app.Application;
 
 public class App extends Application {
 
-	private static String username;
-	private static String password;
-	private static Cart cart;
-
-	@Override
-	public void onCreate() {
-		super.onCreate();
-		username = "";
-		password = "";
-		cart = new Cart();
-	}
+	private static String username = "";
+	private static String password = "";
+	private static Cart cart = new Cart();
 
 	public static String getUsername() {
 		return username;

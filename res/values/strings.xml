@@ -7,9 +7,14 @@
     <string name="title_activity_scan_screen">Scan_screen</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_history_screen">HistoryScreen</string>
+    <string name="title_activity_history_screen">History Screen</string>
     <string name="title_activity_shopping_cart">ShoppingCart</string>
     
     <string name="btn_back">Back</string>
+    
+    <string name="emptyTable">Empty Table</string>
+    <string name="headerName">Name</string>
+    <string name="headerQuantity">Qt.</string>
+    <string name="headerPrice">Price</string>
 
 </resources>

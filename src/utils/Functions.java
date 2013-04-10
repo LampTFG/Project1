@@ -68,4 +68,5 @@ public class Functions {
 	public static int productDecrypt(String code){
 		return Integer.parseInt(code.replace("Lamp_", ""));
 	}
+	
 }

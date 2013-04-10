@@ -11,5 +11,4 @@ public class Vars {
 	public static String wsProductPath = "store/api/products";
 	
 	//
-	
 }
