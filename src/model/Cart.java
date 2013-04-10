@@ -1,11 +1,11 @@
 package model;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Cart {
 
 	private int idUser;
-	private HashMap<Integer, Integer> cart = new HashMap<Integer, Integer>();
+	private ArrayList<ShopItem> cart;
 	
 	public int getIdUser() {
 		return idUser;
@@ -13,20 +13,26 @@ public class Cart {
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
-	public HashMap<Integer, Integer> getCart() {
+	
+	public ArrayList<ShopItem> getCart() {
 		return cart;
 	}
-	public void setCart(HashMap<Integer, Integer> cart) {
+	public void setCart(ArrayList<ShopItem> cart) {
 		this.cart = cart;
 	}
-	
 	public void addItem(int idProd, int qtd){
-		cart.put(idProd, qtd);
+		cart.add(new ShopItem(idProd, qtd));
 	}
+	
 	public void editItem(int idProd, int qtd){
-		cart.remove(idProd);
-		cart.put(idProd, qtd);
+		for (ShopItem si : cart) {
+			if(si.getIdProd()==idProd){
+				si.setQtd(qtd);
+				return;
+			}
+		}
 	}
+	
 	public void cleanCart(){
 		cart.clear();
 	}

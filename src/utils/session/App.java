@@ -1,6 +1,6 @@
 package utils.session;
 
-import com.example.project01.ShoppingCart;
+import model.Cart;
 
 import android.app.Application;
 
@@ -8,14 +8,14 @@ public class App extends Application {
 
 	private static String username;
 	private static String password;
-	private static ShoppingCart cart;
+	private static Cart cart;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		username = "";
 		password = "";
-		cart = new ShoppingCart();
+		cart = new Cart();
 	}
 
 	public static String getUsername() {
@@ -34,11 +34,11 @@ public class App extends Application {
 		App.password = password;
 	}
 
-	public static ShoppingCart getCart() {
+	public static Cart getCart() {
 		return cart;
 	}
 
-	public static void setCart(ShoppingCart cart) {
+	public static void setCart(Cart cart) {
 		App.cart = cart;
 	}
 	

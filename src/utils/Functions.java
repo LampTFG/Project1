@@ -1,6 +1,6 @@
 package utils;
 
-import com.example.project01.ShoppingCart;
+import model.Cart;
 
 import utils.session.App;
 
@@ -29,7 +29,7 @@ public class Functions {
 	public static void logOut() {
 		App.setPassword("");
 		App.setUsername("");
-		App.setCart(new ShoppingCart());
+		App.setCart(new Cart());
 	}
 	
 	/**

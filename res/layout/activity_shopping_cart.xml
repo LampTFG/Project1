@@ -3,12 +3,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFE0"
+    android:gravity="center_horizontal"
     android:orientation="vertical" >
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="@string/btn_back"
-        android:onClick="back" />
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+
+			<TableLayout 
+			    android:id="@+id/tableShoppingCart" 
+			    android:layout_height="wrap_content" 
+			    android:layout_width="match_parent">
+				<TableRow 
+				    android:id="@+id/tableRow1" 
+				    android:layout_width="match_parent" 
+				    android:layout_height="wrap_content">
+					<TextView 
+					    android:background="@drawable/cell_header" 
+				    	android:textColor="#FFF" 
+				    	android:textStyle="bold" 
+				    	android:gravity="center_horizontal" 
+				    	android:id="@+id/textView1" 
+				    	android:layout_weight="0.3" 
+				    	android:layout_width="wrap_content" 
+				    	android:layout_height="wrap_content" 
+				    	android:textAppearance="?android:attr/textAppearanceMedium" 
+				    	android:text="Shopping Cart"
+				    	android:layout_margin="1dp"/>
+				</TableRow>
+				<TableRow 
+				    android:id="@+id/tableRow2" 
+				    android:layout_width="match_parent" 
+				    android:layout_height="wrap_content">
+					<TextView 
+					    android:background="@drawable/cell_shape" 
+					    android:id="@+id/textView1" 
+					    android:layout_weight="0.3" 
+					    android:layout_width="wrap_content" 
+					    android:layout_height="wrap_content" 
+					    android:textAppearance="?android:attr/textAppearanceMedium" 
+					    android:text="Celula1"
+					    android:layout_marginLeft="1dp"
+			    		android:layout_marginRight="1dp"/>
+					<TextView 
+					    android:background="@drawable/cell_shape" 
+					    android:id="@+id/textView2" 
+					    android:layout_weight="0.3" 
+					    android:layout_width="wrap_content" 
+					    android:layout_height="wrap_content" 
+					    android:textAppearance="?android:attr/textAppearanceMedium" 
+					    android:text="Celula2"
+					    android:layout_marginLeft="1dp"
+			    		android:layout_marginRight="1dp"/>
+					<TextView 
+					    android:background="@drawable/cell_shape" 
+					    android:id="@+id/textView3" 
+					    android:layout_weight="0.3" 
+					    android:layout_width="wrap_content" 
+					    android:layout_height="wrap_content" 
+					    android:textAppearance="?android:attr/textAppearanceMedium" 
+					    android:text="Celula3"
+					    android:layout_marginLeft="1dp"
+			    		android:layout_marginRight="1dp"/>
+				</TableRow>
+			</TableLayout>
+	</LinearLayout>				    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:onClick="back"
+            android:text="@string/btn_back" />
+
+    </LinearLayout>
+
 </LinearLayout>
