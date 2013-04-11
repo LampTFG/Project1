@@ -41,49 +41,54 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int shopping_cart_racing=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f09001d;
-        public static final int barCodeEdit=0x7f090004;
+        public static final int action_settings=0x7f090020;
+        public static final int barCodeEdit=0x7f090006;
         public static final int btnBack=0x7f090001;
-        public static final int btnBackWelcome=0x7f090019;
-        public static final int btnCart=0x7f09001c;
-        public static final int btnConfirmar=0x7f090016;
-        public static final int btnHistory=0x7f09001b;
-        public static final int btnScan=0x7f09001a;
-        public static final int dummy_button=0x7f09000c;
-        public static final int edtPass=0x7f090015;
-        public static final int edtUser=0x7f090012;
-        public static final int encodeEdit=0x7f090007;
-        public static final int encodebtn=0x7f090008;
-        public static final int fullscreen_content=0x7f09000a;
-        public static final int fullscreen_content_controls=0x7f09000b;
-        public static final int greeting=0x7f090017;
-        public static final int imageView1=0x7f09000d;
-        public static final int lblLoginScreen=0x7f09000f;
-        public static final int lblPass=0x7f090014;
-        public static final int lblUser=0x7f090011;
-        public static final int linearLayout1=0x7f090010;
-        public static final int linearLayout2=0x7f090013;
-        public static final int linearLayout3=0x7f09000e;
-        public static final int scan=0x7f090002;
-        public static final int shoppingCartTitle=0x7f090003;
+        public static final int btnBackWelcome=0x7f09001b;
+        public static final int btnCart=0x7f09001e;
+        public static final int btnConfirmar=0x7f090018;
+        public static final int btnHistory=0x7f09001d;
+        public static final int btnScan=0x7f09001c;
+        public static final int dummy_button=0x7f09000e;
+        public static final int edtPass=0x7f090017;
+        public static final int edtUser=0x7f090014;
+        public static final int encodeEdit=0x7f090009;
+        public static final int encodebtn=0x7f09000a;
+        public static final int fullscreen_content=0x7f09000c;
+        public static final int fullscreen_content_controls=0x7f09000d;
+        public static final int greeting=0x7f090019;
+        public static final int imageView1=0x7f09000f;
+        public static final int lblLoginScreen=0x7f090011;
+        public static final int lblPass=0x7f090016;
+        public static final int lblUser=0x7f090013;
+        public static final int linearLayout1=0x7f090012;
+        public static final int linearLayout2=0x7f090015;
+        public static final int linearLayout3=0x7f090010;
+        public static final int menu_settings=0x7f09001f;
+        public static final int name=0x7f090002;
+        public static final int product_name_edT=0x7f090003;
+        public static final int scan=0x7f090004;
+        public static final int shoppingCartTitle=0x7f090005;
         public static final int tableHistory=0x7f090000;
-        public static final int tableShoppingCart=0x7f090009;
-        public static final int textURL=0x7f090018;
-        public static final int typ=0x7f090006;
-        public static final int typEdit=0x7f090005;
+        public static final int tableShoppingCart=0x7f09000b;
+        public static final int textURL=0x7f09001a;
+        public static final int typ=0x7f090008;
+        public static final int typEdit=0x7f090007;
     }
     public static final class layout {
         public static final int activity_history_screen=0x7f030000;
-        public static final int activity_scan_screen=0x7f030001;
-        public static final int activity_shopping_cart=0x7f030002;
-        public static final int activity_start_up=0x7f030003;
-        public static final int login_screen=0x7f030004;
-        public static final int telaboasvindas=0x7f030005;
+        public static final int activity_product_show=0x7f030001;
+        public static final int activity_scan_screen=0x7f030002;
+        public static final int activity_shopping_cart=0x7f030003;
+        public static final int activity_start_up=0x7f030004;
+        public static final int login_screen=0x7f030005;
+        public static final int telaboasvindas=0x7f030006;
     }
     public static final class menu {
-        public static final int history_screen=0x7f080000;
-        public static final int scan_screen=0x7f080001;
-        public static final int shopping_cart=0x7f080002;
+        public static final int activity_product_show=0x7f080000;
+        public static final int history_screen=0x7f080001;
+        public static final int scan_screen=0x7f080002;
+        public static final int shopping_cart=0x7f080003;
     }
     public static final class string {
         public static final int action_settings=0x7f060004;
@@ -95,9 +100,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int headerPrice=0x7f06000c;
         public static final int headerQuantity=0x7f06000b;
         public static final int hello_world=0x7f060005;
+        public static final int menu_settings=0x7f06000e;
         public static final int splash=0x7f060002;
         public static final int start_button=0x7f060001;
         public static final int title_activity_history_screen=0x7f060006;
+        public static final int title_activity_product_show=0x7f06000f;
         public static final int title_activity_scan_screen=0x7f060003;
         public static final int title_activity_shopping_cart=0x7f060007;
     }
