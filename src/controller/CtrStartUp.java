@@ -8,9 +8,6 @@ public class CtrStartUp {
 	public CtrStartUp(Context context) {
 		conn = new DBConn(context);
 	}
-	public void populate(){
-		conn.populateDataBase(conn.getDatabase());
-	}
 	public void close(){
 		conn.Close(conn.getDatabase());
 	}
