@@ -168,11 +168,9 @@ public class StartUp extends Activity {
 	public void goLoginScreen(View v){
 		//database creation and population
 		CtrStartUp ctr = new CtrStartUp(getApplicationContext());
-		ctr.populate();
 		ctr.close();
 		//redirects to the logIn Screen
 		Intent i = new Intent(Views.loginIntent);
 		StartUp.this.startActivity(i);
-		StartUp.this.finish();
 	}
 }
