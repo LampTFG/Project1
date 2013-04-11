@@ -9,6 +9,11 @@ public class Product implements Serializable{
 	String longDesc;
 	String name;
 	
+	public String toString(){
+		return "ID: "+this.id+"/nName: "+this.name+"/nShort Description: "+this.shortDesc+
+				"/nLong Description: "+this.longDesc+"/nPrice: "+this.price;
+	}
+	
 	public String getName() {
 		return name;
 	}
