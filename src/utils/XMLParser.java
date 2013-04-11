@@ -19,7 +19,8 @@ public class XMLParser extends DefaultHandler {
 	private String tempVal;
 	private String lookingFor;
 	private String resp;
-
+	//Need to find a better XML parses. 
+	//PrestaShop API response comes with html tags inside XML tags
 	// Create the Constructor
 	public XMLParser(String data, String search) {
 		this.data = data;

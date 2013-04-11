@@ -8,5 +8,6 @@ public class Views {
 	public static String shoppingCartIntent = "com.example.project01.ShoppingCart";
 	public static String historyIntent = "com.example.project01.HistoryScreen";
 	public static String welcomeIntent = "com.example.project01.welcome";
+	public static String productShowIntent = "com.example.project01.ProductShow";
 	
 }
