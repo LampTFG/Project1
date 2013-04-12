@@ -40,6 +40,11 @@ public class ProductRequester extends Thread {
 		return product;
 	}
 	
+	public Product find(int id){
+		this.prodID = id;
+		return find();
+	}
+	
 	private Product parseAttributes(String response){
 		Product product = new Product();
 		
@@ -64,7 +69,6 @@ public class ProductRequester extends Thread {
 		product.setPrice(Float.parseFloat(xml.getResp()));
 		
 		return product;
-		
 	}
 	public void run() {
         this.product=find();
