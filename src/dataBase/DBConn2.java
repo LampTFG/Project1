@@ -36,7 +36,6 @@ public class DBConn2 extends SQLiteOpenHelper {
 		super(context, DATABASE_NAME, null, 1);
 		this.context = context;
 		DBPATH = context.getDatabasePath(DATABASE_NAME).getPath();
-		System.out.println(DBPATH);
 	}
 
 	/**
@@ -114,7 +113,6 @@ public class DBConn2 extends SQLiteOpenHelper {
 		}
 
 		dbInputStream.close();
-		System.out.println(dbStream.toString());
 
 		dbStream.flush();
 		dbStream.close();
@@ -131,7 +129,7 @@ public class DBConn2 extends SQLiteOpenHelper {
 			return SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.NO_LOCALIZED_COLLATORS);
 		} catch (Exception e) {
 			// Se não conseguir copiar o banco um novo será retornado
-			System.out.println("Exception"+e.getMessage());
+			System.err.println("Exception"+e.getMessage());
 			return getWritableDatabase();
 		}
 
