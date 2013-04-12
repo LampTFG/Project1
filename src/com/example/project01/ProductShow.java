@@ -1,11 +1,17 @@
 package com.example.project01;
 
 import utils.ProductRequester;
+import utils.session.App;
 import model.Product;
+import model.ShopItem;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProductShow extends Activity {
 	Product product;
@@ -45,6 +51,18 @@ public class ProductShow extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_product_show, menu);
 		return true;
+	}
+	
+	public void onClick(View v){
+		EditText qtyed = (EditText) findViewById(R.id.product_quantity_ed);
+		Log.d("ProductShow", qtyed.getText().toString());
+		System.out.println("ProductSow "+qtyed.getText().toString());
+		ShopItem si = new ShopItem(product.getId(), Integer.parseInt(qtyed.getText().toString()));
+		
+		System.out.println("Product Show" + si.getIdProd() + App.getCart());
+		App.getCart().addItem(si);
+		Toast toast = Toast.makeText(this, product.getName()+" adicionado ao carrinho.",Toast.LENGTH_SHORT);
+		toast.show();
 	}
 
 }
