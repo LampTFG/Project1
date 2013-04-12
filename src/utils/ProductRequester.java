@@ -2,14 +2,35 @@ package utils;
 
 import model.Product;
 
-public class ProductRequester {
+public class ProductRequester extends Thread {
 
+	int prodID;
+	Product product;
 	
-	public static Product find(int id){
-		Product product;
-		int prodID = id;
-		System.out.println("entrou no find");
-		Response res = new Response(Functions.urlConcat("http://"+ Vars.wsServer, 
+	public ProductRequester(int prodID) {
+		super();
+		this.prodID = prodID;
+	}
+
+	public int getProdID() {
+		return prodID;
+	}
+
+	public void setProdID(int prodID) {
+		this.prodID = prodID;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Product find(){
+		System.out.println("ProductRequester: entrou no find");
+		Response res = new Response(Functions.urlConcat(Vars.wsServer, 
 				Vars.wsProductPath + "/"+prodID+"?ws_key="+ Vars.wsKey));
 		String response = res.getResponse();
 		System.out.println("Response: "+ response);
@@ -19,7 +40,7 @@ public class ProductRequester {
 		return product;
 	}
 	
-	private static Product parseAttributes(String response){
+	private Product parseAttributes(String response){
 		Product product = new Product();
 		
 		XMLParser xml = new XMLParser(response, "id");
@@ -45,15 +66,9 @@ public class ProductRequester {
 		return product;
 		
 	}
-	/*public synchronized void run() {
-		Response res = new Response(
-				Functions.urlConcat("http://" + Vars.wsServer,
-						Vars.wsProductPath + "/3?ws_key=" + Vars.wsKey));
-		String response = res.getResponse();
-		XMLParser xml = new XMLParser(response, "name");
-		xml.parse();
-		respText = xml.getResp();
-		notifyAll();
-	}*/
+	public void run() {
+        this.product=find();
+        notifyAll();
+    }
 	
 }
