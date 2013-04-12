@@ -1,11 +1,8 @@
 package com.example.project01;
 
-import utils.DialogManager;
+import utils.DialogManager; 
 import utils.Functions;
-import utils.Response;
-import utils.Vars;
 import utils.Views;
-import utils.XMLParser;
 import utils.session.App;
 import zxingHelpers.IntentIntegrator;
 import zxingHelpers.IntentResult;
@@ -15,7 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class Welcome extends Activity implements Runnable {
+public class Welcome extends Activity  {
 	String respText;
 	String barcord;
 
@@ -24,22 +21,14 @@ public class Welcome extends Activity implements Runnable {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.telaboasvindas);
 
-		try {
-			TextView greeting = (TextView) findViewById(R.id.greeting);
-			if (App.getUsername() != null) 
-				greeting.setText("Welcome " + " " + App.getUsername());
+		TextView greeting = (TextView) findViewById(R.id.greeting);
+		if (App.getUsername() != null) 
+			greeting.setText("Welcome " + " " + App.getUsername());
 
-			Thread t = new Thread(this);
-			t.start();
-			wait();
-			String webText = "erro na leitura";
-			webText = respText;
-			TextView text = (TextView) findViewById(R.id.textURL);
-			text.setText(webText);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String webText = "erro na leitura";
+		webText = respText;
+		TextView text = (TextView) findViewById(R.id.textURL);
+		text.setText(webText);
 	}
 
 	public void backMainScreen(View v) {
@@ -47,18 +36,6 @@ public class Welcome extends Activity implements Runnable {
 		Intent i = new Intent(Views.loginIntent);
 		Welcome.this.startActivity(i);
 		Welcome.this.finish();
-	}
-
-	@Override
-	public synchronized void run() {
-		Response res = new Response(
-				Functions.urlConcat("http://" + Vars.wsServer,
-						Vars.wsProductPath + "/3?ws_key=" + Vars.wsKey));
-		String response = res.getResponse();
-		XMLParser xml = new XMLParser(response, "name");
-		xml.parse();
-		respText = xml.getResp();
-		notifyAll();
 	}
 
 	public void checkHistory(View v) {

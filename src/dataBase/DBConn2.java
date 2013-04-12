@@ -1,6 +1,5 @@
 package dataBase;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,10 +61,7 @@ public class DBConn2 extends SQLiteOpenHelper {
 		SQLiteDatabase db = null;
 		try {
 			String path = DBPATH;
-			File f= new File(path);
-			f.delete();
-			db = SQLiteDatabase.openDatabase(path, null,
-					SQLiteDatabase.OPEN_READONLY);
+			db = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.NO_LOCALIZED_COLLATORS);
 			db.close();
 		} catch (SQLiteException e) {
 			System.err.println("ERRO: "+e.getMessage());
