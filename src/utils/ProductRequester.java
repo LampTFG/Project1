@@ -1,16 +1,17 @@
 package utils;
 
+import android.os.AsyncTask;
 import model.Product;
 
-public class ProductRequester extends Thread {
+public class ProductRequester extends AsyncTask<String, Void, Product> {
 
 	int prodID;
 	Product product;
 	
-	public ProductRequester(int prodID) {
+	/*public ProductRequester(int prodID) {
 		super();
 		this.prodID = prodID;
-	}
+	}*/
 
 	public int getProdID() {
 		return prodID;
@@ -74,5 +75,20 @@ public class ProductRequester extends Thread {
         this.product=find();
         notifyAll();
     }
+
+	@Override
+	protected Product doInBackground(String... params) {
+		prodID = Integer.parseInt(params[0]);
+		find();
+		System.out.println("ProductRequester "+ product.toString());
+		return product;
+	}
+/*
+	@Override
+	protected Product onPostExceute(Product result) {
+		
+		find();
+		return product;
+	}*/
 	
 }
