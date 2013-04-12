@@ -7,6 +7,9 @@ public class Cart {
 	private int idUser;
 	private ArrayList<ShopItem> cart;
 	
+	public Cart(){
+		cart = new ArrayList<ShopItem>();
+	}
 	public int getIdUser() {
 		return idUser;
 	}
