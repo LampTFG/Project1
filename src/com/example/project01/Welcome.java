@@ -84,14 +84,16 @@ public class Welcome extends Activity implements Runnable {
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-		System.out.println("dddd "+resultCode);
+		
 		if (scanResult != null && scanResult.getContents() != null) {
 			barcord = scanResult.getContents();
 			System.out.println("Value: " + barcord);
 			if(Functions.isCodeValid(barcord)){
 				System.out.println("Codigo Valido: "+Functions.productDecrypt(barcord));
-				//redirects to Product Screen
-				//please, implement it
+				int prodID = Functions.productDecrypt(barcord);
+				Intent i = new Intent(Views.productShowIntent);
+				i.putExtra("product_id", String.valueOf(prodID));
+				startActivity(i);
 			}else{
 				DialogManager.showErrorMessage(this, "Erro", "QR Invalid");
 			}
