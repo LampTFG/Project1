@@ -18,7 +18,7 @@ public class ProductShow extends Activity {
 		String prodID = getIntent().getStringExtra("product_id");
 		System.out.println("prod id "+prodID);
 		ProductRequester pr = new ProductRequester(Integer.parseInt(prodID));
-		product = pr.getProduct();
+		product = pr.getProduct(); 
 		
 		setProductInfos();
 		
