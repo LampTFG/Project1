@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProductShow extends Activity {
 	Product product;
@@ -59,6 +60,8 @@ public class ProductShow extends Activity {
 		
 		System.out.println("Product Show" + si.getIdProd() + App.getCart());
 		App.getCart().addItem(si);
+		Toast toast = Toast.makeText(this, product.getName()+" adicionado ao carrinho.",Toast.LENGTH_SHORT);
+		toast.show();
 	}
 
 }
