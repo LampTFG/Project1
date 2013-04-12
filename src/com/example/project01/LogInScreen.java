@@ -4,6 +4,7 @@ package com.example.project01;
 import utils.DialogManager;
 import utils.Views; 
 import utils.session.App;
+import model.Cart;
 import model.User;
 import controller.CtrLogin;
 import android.app.Activity;
@@ -31,6 +32,7 @@ public class LogInScreen extends Activity{
 		Intent i = new Intent(Views.welcomeIntent);
 		if(ctr.validaUser(getApplicationContext(), u)){
 			App.setUsername(edtUser);
+			App.setCart(new Cart());
 		}
 		if(App.isLoged()){
 			LogInScreen.this.startActivity(i);
