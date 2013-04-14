@@ -68,5 +68,9 @@ public class Functions {
 	public static int productDecrypt(String code){
 		return Integer.parseInt(code.replace("Lamp_", ""));
 	}
+
+	public static String getProductsUrl(int prodID) {
+		return urlConcat(Vars.wsServer,Vars.wsProductPath + "/"+prodID+"?ws_key="+ Vars.wsKey);
+	}
 	
 }
