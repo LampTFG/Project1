@@ -69,7 +69,7 @@ public class Welcome extends Activity  {
 				System.out.println("Welcome -Codigo Valido: "+Functions.productDecrypt(barcord));
 				int prodID = Functions.productDecrypt(barcord);
 				Intent i = new Intent(Views.productShowIntent);
-				i.putExtra("Welcome -product_id", String.valueOf(prodID));
+				i.putExtra("product_id", String.valueOf(prodID));
 				startActivity(i);
 			}else{
 				DialogManager.showErrorMessage(this, "Erro", "QR Invalid");
