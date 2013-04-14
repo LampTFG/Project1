@@ -1,17 +1,19 @@
 package utils;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import model.Product;
 
 public class ProductRequester extends AsyncTask<String, Void, Product> {
 
+	Activity context;
 	int prodID;
 	Product product;
 	
-	/*public ProductRequester(int prodID) {
-		super();
-		this.prodID = prodID;
-	}*/
+	public ProductRequester(Activity context) {
+		this.context = context;
+	}
 
 	public int getProdID() {
 		return prodID;
@@ -34,16 +36,14 @@ public class ProductRequester extends AsyncTask<String, Void, Product> {
 		Response res = new Response(Functions.urlConcat(Vars.wsServer, 
 				Vars.wsProductPath + "/"+prodID+"?ws_key="+ Vars.wsKey));
 		String response = res.getResponse();
-		System.out.println("Response: "+ response);
 		product = parseAttributes(response);
 		
-		System.out.println("Product: "+product.toString());
 		return product;
 	}
 	
-	public Product find(int id){
+	public void find(int id){
 		this.prodID = id;
-		return find();
+		find();
 	}
 	
 	private Product parseAttributes(String response){
@@ -71,24 +71,10 @@ public class ProductRequester extends AsyncTask<String, Void, Product> {
 		
 		return product;
 	}
-	public void run() {
-        this.product=find();
-        notifyAll();
-    }
 
 	@Override
 	protected Product doInBackground(String... params) {
-		prodID = Integer.parseInt(params[0]);
-		find();
-		System.out.println("ProductRequester "+ product.toString());
+		find(Integer.parseInt(params[0]));
 		return product;
 	}
-/*
-	@Override
-	protected Product onPostExceute(Product result) {
-		
-		find();
-		return product;
-	}*/
-	
 }

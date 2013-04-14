@@ -1,5 +1,7 @@
 package com.example.project01;
 
+import java.util.concurrent.ExecutionException;
+
 import utils.ProductRequester;
 import utils.session.App;
 import model.Product;
@@ -23,12 +25,17 @@ public class ProductShow extends Activity {
 		
 		String prodID = getIntent().getStringExtra("product_id");
 		System.out.println("prod id "+prodID);
-		new ProductRequester().execute(prodID);
-		//product = pr.getProduct(); 
-		
-		setProductInfos();
-		
-		
+		try {
+			product = new ProductRequester(this).execute(prodID).get();
+			Log.d("Product Show", product.toString());
+			setProductInfos();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 	public void setProductInfos(){
