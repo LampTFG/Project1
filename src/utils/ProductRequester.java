@@ -1,48 +1,25 @@
 package utils;
 
+import android.os.AsyncTask;
 import model.Product;
 
-public class ProductRequester extends Thread {
-
-	int prodID;
-	Product product;
+public class ProductRequester extends AsyncTask<String, Void, Product> {
 	
-	public ProductRequester(int prodID) {
-		super();
-		this.prodID = prodID;
-	}
+	Product product;
 
-	public int getProdID() {
-		return prodID;
-	}
-
-	public void setProdID(int prodID) {
-		this.prodID = prodID;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	public Product find(){
-		System.out.println("ProductRequester: entrou no find");
+	private Product find(int prodID){
 		Response res = new Response(Functions.urlConcat(Vars.wsServer, 
 				Vars.wsProductPath + "/"+prodID+"?ws_key="+ Vars.wsKey));
 		String response = res.getResponse();
-		System.out.println("Response: "+ response);
 		product = parseAttributes(response);
 		
-		System.out.println("Product: "+product.toString());
 		return product;
 	}
-	
-	public Product find(int id){
-		this.prodID = id;
-		return find();
+
+	@Override
+	protected Product doInBackground(String... params) {
+		find(Integer.parseInt(params[0]));
+		return product;
 	}
 	
 	private Product parseAttributes(String response){
@@ -70,9 +47,5 @@ public class ProductRequester extends Thread {
 		
 		return product;
 	}
-	public void run() {
-        this.product=find();
-        notifyAll();
-    }
-	
+
 }
