@@ -25,8 +25,12 @@ public class ProductShow extends Activity {
 		
 		String prodID = getIntent().getStringExtra("product_id");
 		System.out.println("prod id "+prodID);
+		setProduct(prodID);
+	}
+
+	private void setProduct(String prodID){
 		try {
-			product = new ProductRequester(this).execute(prodID).get();
+			product = new ProductRequester().execute(prodID).get();
 			Log.d("Product Show", product.toString());
 			setProductInfos();
 		} catch (InterruptedException e) {
@@ -35,10 +39,10 @@ public class ProductShow extends Activity {
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
-
-	public void setProductInfos(){
+	
+	private void setProductInfos(){
 		//Need to fix layout so all infos can fit correctly
 		//Need to find a better XML parser.
 		TextView nameTv = (TextView) findViewById(R.id.name_tv);
@@ -62,12 +66,11 @@ public class ProductShow extends Activity {
 	
 	public void onClick(View v){
 		EditText qtyed = (EditText) findViewById(R.id.product_quantity_ed);
-		Log.d("ProductShow", qtyed.getText().toString());
-		System.out.println("ProductSow "+qtyed.getText().toString());
+		
 		ShopItem si = new ShopItem(product.getId(), Integer.parseInt(qtyed.getText().toString()));
 		
-		System.out.println("Product Show" + si.getIdProd() + App.getCart());
 		App.getCart().addItem(si);
+		
 		Toast toast = Toast.makeText(this, product.getName()+" adicionado ao carrinho.",Toast.LENGTH_SHORT);
 		toast.show();
 	}
