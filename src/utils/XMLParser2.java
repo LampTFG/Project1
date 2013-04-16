@@ -62,19 +62,19 @@ public class XMLParser2 {
 				continue;
 			}
 			String name = parser.getName();
-			System.out.println("readCustomer parser getName: "+ parser.getName());
+			//System.out.println("readCustomer parser getName: "+ parser.getName());
 			if(name.equals("id")){
 				customerID = readID(parser);
 			}else if(name.equals("email")){
 				login = readEmail(parser);
 			}else if(name.equals("passwd")){
-				login = readPassword(parser);
+				password = readPassword(parser);
 			}else{
 				skip(parser);
 			}
 		}
 		
-		return new User(customerID, password, login);
+		return new User( login, password, customerID);
 	}
 	
 	private String readID(XmlPullParser parser) throws XmlPullParserException, IOException{

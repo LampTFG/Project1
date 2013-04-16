@@ -63,6 +63,7 @@ public class CustomerRequester extends AsyncTask<String, Void, User>{
 		String id = findId(email);
 		System.out.println("Customer Requester: find id "+ id);
 		findUser(id);
+		System.out.println("Customer Requester: findUser id "+ user.getId()+ "Pass: "+user.getPass());
 	}
 	
 	private User parseAttributes(String response){

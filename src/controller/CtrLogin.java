@@ -28,6 +28,7 @@ public class CtrLogin {
 		try {
 			User regUser = new CustomerRequester().execute(u.getLogin()).get();
 			System.out.println("RegUser pass "+regUser.getPass());
+			System.out.println("User pass "+u.getPass()+" _MD5: "+Functions.md5(u.getPass()));
 			if(regUser.getPass() == Functions.md5(u.getPass()))
 				return true;
 			else
