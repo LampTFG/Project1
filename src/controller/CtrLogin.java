@@ -27,6 +27,7 @@ public class CtrLogin {
 	public boolean validaUser(Context context, User u){
 		try {
 			User regUser = new CustomerRequester().execute(u.getLogin()).get();
+			System.out.println("RegUser pass "+regUser.getPass());
 			if(regUser.getPass() == Functions.md5(u.getPass()))
 				return true;
 			else

@@ -32,7 +32,7 @@ public class ProductRequester extends Thread {
 		System.out.println("ProductRequester: entrou no find");
 		Response res = new Response(Functions.urlConcat(Vars.wsServer, 
 				Vars.wsProductPath + "/"+prodID+"?ws_key="+ Vars.wsKey));
-		String response = res.getResponse();
+		String response = res.getResponse().toString();
 		System.out.println("Response: "+ response);
 		product = parseAttributes(response);
 		
