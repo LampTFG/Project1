@@ -40,12 +40,6 @@ public class Welcome extends Activity  {
 			iv.setLayoutParams(new LayoutParams(135, 135));
 			iv.setBackgroundResource(R.drawable.round_button);
 			iv.setImageResource(R.drawable.lampada_quebrada);
-			//tentativa de adicionar margens, insucesso
-			MarginLayoutParams marginParams = new MarginLayoutParams(iv.getLayoutParams());
-		    marginParams.setMargins(15, 0, 15, 0);
-		    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(marginParams);
-		    iv.setLayoutParams(layoutParams);
-		    //fim da tentativa
 			ll.addView(iv);
 		}
 	}

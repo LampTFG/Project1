@@ -37,6 +37,13 @@
     
     
     <!-- Personal Style -->
+    <style name="page">
+        <item name="android:padding">2dp</item>
+    </style>
+    <style name="blackPage">
+        <item name="android:padding">2dp</item>
+        <item name="android:background">#000</item>
+    </style>
     <style name="title">
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
@@ -44,12 +51,10 @@
     <style name="input">
         <item name="android:background">#222</item>
     </style>
-    <style name="page">
-        <item name="android:padding">2dp</item>
-    </style>
     <style name="label">
         <item name="android:paddingRight">5dp</item>
     </style>
+    
     <!-- Buttons -->
 	    <style name="btnScan">
 	        <item name="android:src">@drawable/camera_desenho</item>

@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:onClick="checkLogin"
-            android:text="Confirmar" />
+            android:text="Confirm" />
          
     </LinearLayout>
  
