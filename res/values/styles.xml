@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -15,7 +15,7 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:windowBackground">@drawable/background_gradient</item>
     </style>
 
     <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
@@ -29,10 +29,38 @@
         <item name="android:paddingLeft">2dp</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingRight">2dp</item>
-        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingBottom">5dp</item>
         <item name="android:background">@android:drawable/bottom_bar</item>
     </style>
 
     <style name="ButtonBarButton" />
-
+    
+    
+    <!-- Personal Style -->
+    <style name="title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="input">
+        <item name="android:background">#222</item>
+    </style>
+    <style name="page">
+        <item name="android:padding">2dp</item>
+    </style>
+    <style name="label">
+        <item name="android:paddingRight">5dp</item>
+    </style>
+    <!-- Buttons -->
+	    <style name="btnScan">
+	        <item name="android:src">@drawable/camera_desenho</item>
+	    </style>
+	    <style name="btnShoppingCart">
+	        <item name="android:src">@drawable/shopping_cart_racing</item>
+	    </style>
+	    <style name="btnHistory">
+	        <item name="android:src">@drawable/history</item>
+	    </style>
+	    <style name="btnProfile">
+	        <item name="android:src">@drawable/profile</item>
+	    </style>
 </resources>

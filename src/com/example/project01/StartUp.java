@@ -1,5 +1,6 @@
 package com.example.project01;
 
+import utils.Functions;
 import utils.Views;
 
 import com.example.project01.util.SystemUiHider;
@@ -133,6 +134,10 @@ public class StartUp extends Activity {
 		delayedHide(100);
 	}
 
+	protected void onResume(){
+		super.onResume();
+		Functions.logOut();
+	}
 	/**
 	 * Touch listener to use for in-layout UI controls to delay hiding the
 	 * system UI. This is to prevent the jarring behavior of controls going away

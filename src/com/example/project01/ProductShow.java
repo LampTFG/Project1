@@ -55,7 +55,7 @@ public class ProductShow extends Activity {
 		priceTv.setText(String.valueOf(product.getPrice()));
 		
 		TextView longDescTv = (TextView) findViewById(R.id.long_description_tv);
-		//longDescTv.setText(product.getLongDesc());
+		longDescTv.setText(product.getLongDesc());
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,6 +73,8 @@ public class ProductShow extends Activity {
 		
 		Toast toast = Toast.makeText(this, product.getName()+" adicionado ao carrinho.",Toast.LENGTH_SHORT);
 		toast.show();
+		
+		ProductShow.this.finish();
 	}
 
 }
