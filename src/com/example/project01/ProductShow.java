@@ -49,13 +49,13 @@ public class ProductShow extends Activity {
 		nameTv.setText(product.getName());
 		
 		TextView shortDescTv = (TextView) findViewById(R.id.short_description_tv);
-		shortDescTv.setText(product.getShortDesc());
+		shortDescTv.setText(android.text.Html.fromHtml(product.getShortDesc()).toString());
 		
 		TextView priceTv = (TextView) findViewById(R.id.price_tv);
 		priceTv.setText(String.valueOf(product.getPrice()));
 		
 		TextView longDescTv = (TextView) findViewById(R.id.long_description_tv);
-		//longDescTv.setText(product.getLongDesc());
+		longDescTv.setText(android.text.Html.fromHtml(product.getLongDesc()));
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,6 +73,8 @@ public class ProductShow extends Activity {
 		
 		Toast toast = Toast.makeText(this, product.getName()+" adicionado ao carrinho.",Toast.LENGTH_SHORT);
 		toast.show();
+		
+		ProductShow.this.finish();
 	}
 
 }

@@ -2,23 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFE0"
-    android:orientation="vertical" >
- 
-
+    android:orientation="vertical" 
+	style="@style/page" >
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom" >
-
         <TextView
             android:id="@+id/lblLoginScreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Login Screen" />
+            android:text="Login Screen" 
+            style="@style/title" />
 
     </LinearLayout>
     
@@ -34,6 +32,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="right"
+            style="@style/label"
             android:text="User:" />
      
         <EditText
@@ -42,6 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:hint="user"
+            style="@style/input"
+            android:background="@drawable/round_button"
             android:paddingLeft="10dp" />
  
     </LinearLayout>
@@ -50,7 +51,8 @@
         android:id="@+id/linearLayout2"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:paddingTop="5dp">
  
         <TextView
             android:id="@+id/lblPass"
@@ -58,6 +60,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="right"
+            style="@style/label"
             android:text="Pass:" />
      
         <EditText
@@ -66,6 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:hint="pass"
+            style="@style/input"
+            android:background="@drawable/round_button"
             android:paddingLeft="10dp"
             android:password="true" />
  
@@ -83,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:onClick="checkLogin"
-            android:text="Confirmar" />
+            android:text="Confirm" />
          
     </LinearLayout>
  
