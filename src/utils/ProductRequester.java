@@ -1,13 +1,20 @@
 package utils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import android.os.AsyncTask;
 import model.Product;
+import model.User;
 
 public class ProductRequester extends AsyncTask<String, Void, Product> {
 	
 	Product product;
 
-	public Product find(int prodID){
+	/*public Product find(int prodID){
 		Response res = new Response(Functions.urlConcat(Vars.wsServer, 
 				Vars.wsProductPath + "/"+prodID+"?ws_key="+ Vars.wsKey));
 		String response = res.getResponse().toString();
@@ -15,12 +22,37 @@ public class ProductRequester extends AsyncTask<String, Void, Product> {
 		product = parseAttributes(response);
 		
 		return product;
-	}
+	}*/
 
 	@Override
 	protected Product doInBackground(String... params) {
-		find(Integer.parseInt(params[0]));
+		find(params[0]);
 		return product;
+	}
+	
+	private void findProduct(String id){
+		Response res = new Response(Functions.urlConcat(Vars.wsServer, 
+				Vars.wsProductPath + "/"+id+"?ws_key="+ Vars.wsKey));
+		//String response = res.getResponse().toString();
+		InputStream i = res.getResponse();
+		//user = parseAttributes(response);
+		XMLParser2 parser = new XMLParser2();
+		try {
+			List entries = parser.parse(i, XMLParser2.GET_PRODUCT_BY_ID);
+			product = (Product) entries.get(0);
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void find(String id){
+		findProduct(id);
+		System.out.println("Customer Requester: findUser id "+ product.getId()+ "Name: "+product.getName());
 	}
 	
 	private Product parseAttributes(String response){

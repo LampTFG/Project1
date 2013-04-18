@@ -11,7 +11,7 @@ public class Vars {
 	public static String wsKey = "4OZ72NAAOCD3ZYWYCOENYIBGU3HU3F39";
 	
 	//For remote access
-	public static String wsServer = "http://http://www.site1366132944.hospedagemdesites.ws/store/";
+	public static String wsServer = "http://www.site1366132944.hospedagemdesites.ws/";
 	
 	//For local Access
 	//public static String wsServer = "http://192.168.1.108";

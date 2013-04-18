@@ -6,6 +6,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Product;
 import model.User;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -18,7 +19,8 @@ public class XMLParser2 {
 	private static final String ns = null;
 	public static final int GET_CUSTOMER_BY_EMAIL = 1;
 	public static final int GET_CUSTOMER_BY_ID = 2;
-	   
+	public static final int GET_PRODUCT_BY_ID = 2;
+	
     public List parse(InputStream in, int option) throws XmlPullParserException, IOException {
         try {
             XmlPullParser parser = Xml.newPullParser();
@@ -45,12 +47,42 @@ public class XMLParser2 {
 				entries.add(readCustomers(parser));
 			}else if(name == "customer"){//when you request a user by id
 				entries.add(readCustomer(parser));
+			}else if(name == "product"){//when request a product by id
+				entries.add(readProduct(parser));
 			}
 		}
 		return entries;
 	}
+	//Read product info from XML
+	private Product readProduct(XmlPullParser parser) throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, ns, "product");
+		String productID=null;
+		String productName = null;
+		String shortDesc = null;
+		String longDesc = null;
+		String price = null;
+		
+		while(parser.next() != XmlPullParser.END_TAG){
+			if(parser.getEventType() != XmlPullParser.START_TAG){
+				continue;
+			}
+			String name = parser.getName();
+			//System.out.println("readCustomer parser getName: "+ parser.getName());
+			if(name.equals("id")){
+				productID = readID(parser);
+				System.out.println("readCustomer parser getName: "+ parser.getName());
+			}else if(name.equals("name")){
+				name = readProductName(parser);
+			}else if(name.equals("passwd")){
+				//password = readPassword(parser);
+			}else{
+				skip(parser);
+			}
+		}
+		return new Product();
+	}
 	
-	//Read all data from a customer
+	//Read customer data from XML
 	private User readCustomer(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, "customer");
 		String customerID=null;
@@ -75,6 +107,14 @@ public class XMLParser2 {
 		}
 		
 		return new User( login, password, customerID);
+	}
+	
+	private String readProductName(XmlPullParser parser) throws XmlPullParserException, IOException{
+		parser.require(XmlPullParser.START_TAG, ns, "name");
+		String name = readText(parser);
+		System.out.println("readProductName: "+name);
+		parser.require(XmlPullParser.END_TAG, ns, "name");
+		return name;
 	}
 	
 	private String readID(XmlPullParser parser) throws XmlPullParserException, IOException{

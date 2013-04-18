@@ -9,6 +9,21 @@ public class Product implements Serializable{
 	String longDesc;
 	String name;
 	
+	
+	public Product() {
+		super();
+	}
+
+	public Product(int id, float price, String shortDesc, String longDesc,
+			String name) {
+		super();
+		this.id = id;
+		this.price = price;
+		this.shortDesc = shortDesc;
+		this.longDesc = longDesc;
+		this.name = name;
+	}
+
 	public String toString(){
 		return "ID: "+this.id+"/nName: "+this.name+"/nShort Description: "+this.shortDesc+
 				"/nLong Description: "+this.longDesc+"/nPrice: "+this.price;
