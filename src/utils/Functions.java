@@ -80,6 +80,7 @@ public class Functions {
 	 */
 	public static String md5(String in) {
         MessageDigest digest;
+        in = Vars.encryptKey+in;
         try {
             digest = MessageDigest.getInstance("MD5");
             digest.reset();
