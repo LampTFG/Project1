@@ -4,7 +4,7 @@ package utils;
 public class Vars {
 	
 	//_COOKIE_KEY_ encrypt key for password on remote server
-	//the file containing this key is found at /var/www/store/config/settings.inc.php
+	//the file containing this key is found at /var/www/store/config/settings.inc.php 
 	public static String encryptKey = "8YB4I3RhahSyr4zbUY84ROJzkTBD0p6oAQRhGehI2CgoEInkzG45PtDU";
 	
 	//ws - WebService
