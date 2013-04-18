@@ -29,4 +29,4 @@ proguard/
 .idea/
 
 # Local config files
-src/utils/Vars.java
+
