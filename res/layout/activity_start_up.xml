@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFE0"
+    style="@style/page"
+    android:id="@+id/startUpPage"
     tools:context=".StartUp" >
 
     <!--
@@ -63,9 +64,6 @@
                 android:layout_height="148dp"
                 android:contentDescription="logo"
                 android:src="@drawable/lampada_quebrada" />
-
         </LinearLayout>
-
     </FrameLayout>
-
 </FrameLayout>

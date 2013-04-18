@@ -10,6 +10,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
+import android.widget.Gallery;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class Welcome extends Activity  {
@@ -20,15 +26,22 @@ public class Welcome extends Activity  {
 	protected synchronized void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.telaboasvindas);
+	}
+	
+	public void onResume(){
+		super.onResume();
+		populateGallery();
+	}
 
-		TextView greeting = (TextView) findViewById(R.id.greeting);
-		if (App.getUsername() != null) 
-			greeting.setText("Welcome " + " " + App.getUsername());
-
-		String webText = "erro na leitura";
-		webText = respText;
-		TextView text = (TextView) findViewById(R.id.textURL);
-		text.setText(webText);
+	private void populateGallery() {
+		LinearLayout ll = (LinearLayout)findViewById(R.id.linearList);
+		for(int i=0;i<5;i++){
+			ImageView iv = new ImageView(this);
+			iv.setLayoutParams(new LayoutParams(135, 135));
+			iv.setBackgroundResource(R.drawable.round_button);
+			iv.setImageResource(R.drawable.lampada_quebrada);
+			ll.addView(iv);
+		}
 	}
 
 	public void backMainScreen(View v) {
@@ -41,20 +54,14 @@ public class Welcome extends Activity  {
 	public void checkHistory(View v) {
 		Intent i = new Intent(Views.historyIntent);
 		Welcome.this.startActivity(i);
-		Welcome.this.finish();
 	}
 
 	public void checkCart(View v) {
 		Intent i = new Intent(Views.shoppingCartIntent);
 		Welcome.this.startActivity(i);
-		Welcome.this.finish();
 	}
 
 	public void scanQRCode(View v) {
-		/*
-		 * Intent i = new Intent(Views.scanIntent);
-		 * Welcome.this.startActivity(i); Welcome.this.finish();
-		 */
 		IntentIntegrator integrator = new IntentIntegrator(this);
 		integrator.initiateScan();
 	}

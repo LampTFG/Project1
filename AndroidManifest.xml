@@ -19,67 +19,66 @@
             android:name="com.example.project01.StartUp"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.example.project01.LogInScreen"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="com.example.project01.LogInScreen" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.example.project01.Welcome"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="com.example.project01.welcome" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.example.project01.ScanScreen"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_scan_screen" >
             <intent-filter>
                 <action android:name="com.example.project01.ScanScreen" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.example.project01.HistoryScreen"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_history_screen" >
             <intent-filter>
                 <action android:name="com.example.project01.HistoryScreen" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.example.project01.ShoppingCart"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_shopping_cart" >
             <intent-filter>
                 <action android:name="com.example.project01.ShoppingCart" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.example.project01.ProductShow"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_product_show" >
             <intent-filter>
                 <action android:name="com.example.project01.ProductShow" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

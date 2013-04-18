@@ -1,5 +1,6 @@
 package com.example.project01;
 
+import utils.Functions;
 import utils.Views;
 
 import com.example.project01.util.SystemUiHider;
@@ -26,7 +27,7 @@ public class StartUp extends Activity {
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
 	 */
-	private static final boolean AUTO_HIDE = true;
+	private static final boolean AUTO_HIDE = false;
 
 	/**
 	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -49,7 +50,7 @@ public class StartUp extends Activity {
 	 * The instance of the {@link SystemUiHider} for this activity.
 	 */
 	private SystemUiHider mSystemUiHider;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,11 +62,9 @@ public class StartUp extends Activity {
 
 		// Set up an instance of SystemUiHider to control the system UI for
 		// this activity.
-		mSystemUiHider = SystemUiHider.getInstance(this, contentView,
-				HIDER_FLAGS);
+		mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
 		mSystemUiHider.setup();
-		mSystemUiHider
-		.setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
+		mSystemUiHider.setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
 			// Cached values.
 			int mControlsHeight;
 			int mShortAnimTime;
@@ -82,8 +81,7 @@ public class StartUp extends Activity {
 						mControlsHeight = controlsView.getHeight();
 					}
 					if (mShortAnimTime == 0) {
-						mShortAnimTime = getResources().getInteger(
-								android.R.integer.config_shortAnimTime);
+						mShortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 					}
 					controlsView
 					.animate()
@@ -93,8 +91,7 @@ public class StartUp extends Activity {
 					// If the ViewPropertyAnimator APIs aren't
 					// available, simply show or hide the in-layout UI
 					// controls.
-					controlsView.setVisibility(visible ? View.VISIBLE
-							: View.GONE);
+					controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
 				}
 
 				if (visible && AUTO_HIDE) {
@@ -130,9 +127,14 @@ public class StartUp extends Activity {
 		// Trigger the initial hide() shortly after the activity has been
 		// created, to briefly hint to the user that UI controls
 		// are available.
-		delayedHide(100);
+		if(AUTO_HIDE)
+			delayedHide(100);
 	}
 
+	protected void onResume(){
+		super.onResume();
+		Functions.logOut();
+	}
 	/**
 	 * Touch listener to use for in-layout UI controls to delay hiding the
 	 * system UI. This is to prevent the jarring behavior of controls going away
@@ -155,7 +157,7 @@ public class StartUp extends Activity {
 			mSystemUiHider.hide();
 		}
 	};
-
+	
 	/**
 	 * Schedules a call to hide() in [delay] milliseconds, canceling any
 	 * previously scheduled calls.
