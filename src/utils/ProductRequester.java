@@ -7,7 +7,7 @@ public class ProductRequester extends AsyncTask<String, Void, Product> {
 	
 	Product product;
 
-	public Product find(){
+	public Product find(int prodID){
 		Response res = new Response(Functions.urlConcat(Vars.wsServer, 
 				Vars.wsProductPath + "/"+prodID+"?ws_key="+ Vars.wsKey));
 		String response = res.getResponse().toString();
