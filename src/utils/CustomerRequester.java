@@ -44,7 +44,6 @@ public class CustomerRequester extends AsyncTask<String, Void, User>{
 
 	private void find(String email, String passwd){
 		findUser(email, passwd);
-		System.out.println("Customer Requester: findUser id "+ user.getId()+ "Pass: "+user.getPass());
 	}
 	
 }
