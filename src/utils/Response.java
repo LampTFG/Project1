@@ -20,7 +20,24 @@ public class Response {
 
 	}
 
-	public String getResponse() {
+	public String toString(InputStream in){
+		BufferedReader rd = new BufferedReader(new InputStreamReader(in),
+				in.toString().length());
+		String line;
+		StringBuilder sb = new StringBuilder();
+		try {
+			while ((line = rd.readLine()) != null) {
+				sb.append(line);
+			}
+			rd.close();
+		} catch (IOException e) {
+			Log.d("CONNECTION  ERROR" + "toString()", "+++++++++++++IOException++++++++++++++");
+			e.printStackTrace();
+		}
+		response = sb.toString();
+		return response;
+	}
+	public InputStream getResponse() {
 		InputStream in = null;
 		try {
 			URL url = new URL(get_url);
@@ -29,20 +46,11 @@ public class Response {
 			conn.connect();
 			/* conn. */
 			in = conn.getInputStream();
-			BufferedReader rd = new BufferedReader(new InputStreamReader(in),
-					in.toString().length());
-			String line;
-			StringBuilder sb = new StringBuilder();
-			while ((line = rd.readLine()) != null) {
-				sb.append(line);
-			}
-			rd.close();
-			response = sb.toString();
 
 		} catch (IOException e1) {
 			Log.d("CONNECTION  ERROR", "+++++++++++++IOException++++++++++++++");
 			e1.printStackTrace();
 		}
-		return response;
+		return in;
 	}
 }

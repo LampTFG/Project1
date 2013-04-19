@@ -1,13 +1,56 @@
 package model;
 
 public class User {
-	private String login;
+	private String id;
+	private String login;//email
 	private String pass;
+	private String firstname;
+	private String lastname;
 	
-	
-	
+
+	public User(String id, String login, String pass, String firstname,
+			String lastname) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.pass = pass;
+		this.firstname = firstname;
+		this.lastname = lastname;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
 	public User() {
 		super();
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public User(String login, String pass, String id) {
+		super();
+		this.login = login;
+		this.pass = pass;
+		this.id = id;
 	}
 	public User(String login, String pass) {
 		super();

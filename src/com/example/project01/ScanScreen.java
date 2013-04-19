@@ -72,7 +72,7 @@ public class ScanScreen extends Activity implements Runnable{
 	@Override
 	public void run() {
 		Response res = new Response(Functions.urlConcat(Vars.wsServer,Vars.wsProductPath,prodID+"?ws_key="+Vars.wsKey));
-        String response = res.getResponse();
+        String response = res.getResponse().toString();
         XMLParser xml = new XMLParser(response, "name");
         xml.parse();
 		respText = xml.getResp();
