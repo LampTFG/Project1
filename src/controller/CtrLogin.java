@@ -23,11 +23,13 @@ import dataBase.DBConn2;
 
 public class CtrLogin {
 	
-	public boolean validaUser(Context context, User u){
+	public boolean validateUser(Context context, User u){
 		try {
+			
 			//It request an user by its email/login
-			User regUser = new CustomerRequester().execute(u.getLogin()).get();
-			if(regUser.getPass().equals( Functions.md5(u.getPass()))){
+			User regUser = new CustomerRequester().execute(u.getLogin(), u.getPass()).get();
+			
+			if(regUser != null){
 				Log.d("CtrLogin", "user is valid!");
 				return true;
 			}

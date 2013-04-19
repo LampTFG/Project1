@@ -42,7 +42,7 @@ public class XMLParser2 {
 				continue;
 			}
 			String name = parser.getName();
-			System.out.println("parser getName: "+ parser.getName());
+			System.out.println("XMLParser2 readPrestashop getName: "+ parser.getName());
 			if(name == "customers"){//when you resquest a user by email
 				entries.add(readCustomers(parser));
 			}else if(name == "customer"){//when you request a user by id
@@ -86,8 +86,10 @@ public class XMLParser2 {
 	private User readCustomer(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, "customer");
 		String customerID=null;
-		String login = null;
-		String password = null;
+		String firstname = null;
+		String lastname = null;
+		String login= null;
+		String passwd = null;
 		
 		while(parser.next() != XmlPullParser.END_TAG){
 			if(parser.getEventType() != XmlPullParser.START_TAG){
@@ -97,16 +99,30 @@ public class XMLParser2 {
 			//System.out.println("readCustomer parser getName: "+ parser.getName());
 			if(name.equals("id")){
 				customerID = readID(parser);
+			}else if(name.equals("firstname")){
+				login = readFirstName(parser);
+			}else if(name.equals("lastname")){
+				lastname = readLastName(parser);
 			}else if(name.equals("email")){
 				login = readEmail(parser);
 			}else if(name.equals("passwd")){
-				password = readPassword(parser);
+				passwd = readPassword(parser);
 			}else{
 				skip(parser);
 			}
 		}
-		
-		return new User( login, password, customerID);
+		if(customerID.equals(null))
+			return null;
+		else
+			return new User(customerID,login,passwd,firstname,lastname);
+	}
+	
+	private String readID(XmlPullParser parser) throws XmlPullParserException, IOException{
+		parser.require(XmlPullParser.START_TAG, ns, "id");
+		String id = readText(parser);
+		System.out.println("XMLParser2: readID: "+id);
+		parser.require(XmlPullParser.END_TAG, ns, "id");
+		return id;
 	}
 	
 	private String readProductName(XmlPullParser parser) throws XmlPullParserException, IOException{
@@ -117,18 +133,26 @@ public class XMLParser2 {
 		return name;
 	}
 	
-	private String readID(XmlPullParser parser) throws XmlPullParserException, IOException{
-		parser.require(XmlPullParser.START_TAG, ns, "id");
-		String id = readText(parser);
-		System.out.println("readID: "+id);
-		parser.require(XmlPullParser.END_TAG, ns, "id");
-		return id;
+	private String readLastName(XmlPullParser parser) throws XmlPullParserException, IOException{
+		parser.require(XmlPullParser.START_TAG, ns, "lastname");
+		String lastname = readText(parser);
+		System.out.println("XMLParser2: readLastName: "+lastname);
+		parser.require(XmlPullParser.END_TAG, ns, "lastname");
+		return lastname;
+	}
+	
+	private String readFirstName(XmlPullParser parser) throws XmlPullParserException, IOException{
+		parser.require(XmlPullParser.START_TAG, ns, "firstname");
+		String firstname = readText(parser);
+		System.out.println("XMLParser2: readFirstName: "+firstname);
+		parser.require(XmlPullParser.END_TAG, ns, "firstname");
+		return firstname;
 	}
 	
 	private String readPassword(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, ns, "passwd");
 		String passwd = readText(parser);
-		System.out.println("readPassword: "+passwd);
+		System.out.println("XMLParser2:  readPassword: "+passwd);
 		parser.require(XmlPullParser.END_TAG, ns, "passwd");
 		return passwd;
 	}
@@ -136,15 +160,15 @@ public class XMLParser2 {
 	private String readEmail(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, ns, "email");
 		String login = readText(parser);
-		System.out.println("readEmail: "+login);
+		System.out.println("XMLParser2 :readEmail: "+login);
 		parser.require(XmlPullParser.END_TAG, ns, "email");
 		return login;
 	}
 	
-	//Read the xml returned from ?email= query and return the id of requested user
-	private String readCustomers(XmlPullParser parser) throws XmlPullParserException, IOException {
+	//Read the xml returned from email,passwd query and return the requested user
+	private User readCustomers(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, "customers");
-		String customerID=null;
+		User customer=null;
 		
 		while(parser.next() != XmlPullParser.END_TAG){
 			if(parser.getEventType() != XmlPullParser.START_TAG){
@@ -152,14 +176,14 @@ public class XMLParser2 {
 			}
 			String name = parser.getName();
 			if(name.equals("customer")){
-				customerID = readCustomerID(parser);
+				customer = readCustomer(parser);
 			}else{
 				skip(parser);
 			}
 		}
-		return(customerID);
+		return(customer);
 	}
-	
+	/*
 	//Read the customer Id from ?email= query
 	private String readCustomerID(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, ns, "customer");
@@ -170,8 +194,8 @@ public class XMLParser2 {
 		
 		return id;
 	}
-	
-	// For the tags login and password, extracts their text values.
+	*/
+	// For the tags, extracts their text values.
 	private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
 	    String result = "";
 	    if (parser.next() == XmlPullParser.TEXT) {
@@ -180,7 +204,7 @@ public class XMLParser2 {
 	    }
 	    return result;
 	}
-	
+	//Skips an unwanted tag
 	private void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
 	    if (parser.getEventType() != XmlPullParser.START_TAG) {
 	        throw new IllegalStateException();

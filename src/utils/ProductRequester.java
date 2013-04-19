@@ -31,8 +31,9 @@ public class ProductRequester extends AsyncTask<String, Void, Product> {
 	}
 	
 	private void findProduct(String id){
+		String filters = "filters=[id]"+id;
 		Response res = new Response(Functions.urlConcat(Vars.wsServer, 
-				Vars.wsProductPath + "/"+id+"?ws_key="+ Vars.wsKey));
+				Vars.wsProductPath + "/?ws_key="+ Vars.wsKey+"&"+filters));
 		//String response = res.getResponse().toString();
 		InputStream i = res.getResponse();
 		//user = parseAttributes(response);

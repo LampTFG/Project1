@@ -23,7 +23,7 @@ public class Functions {
 		resp += strings[strings.length-1];
 		return resp;
 	}
-
+	
 	/**
 	 * Logout... cleans the user parameters and reset the shopping cart
 	 *

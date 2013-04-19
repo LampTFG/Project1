@@ -2,6 +2,7 @@ package com.example.project01;
 
 
 import utils.DialogManager;
+import utils.Functions;
 import utils.Views; 
 import utils.session.App;
 import model.Cart;
@@ -27,10 +28,10 @@ public class LogInScreen extends Activity{
         // Edits
     	String edtUser = ((EditText) findViewById(R.id.edtUser)).getText().toString();
 		String edtPass = ((EditText) findViewById(R.id.edtPass)).getText().toString();
-		User u = new User(edtUser, edtPass);
+		User u = new User(edtUser, Functions.md5(edtPass));
 		CtrLogin ctr = new CtrLogin();
 		Intent i = new Intent(Views.welcomeIntent);
-		if(ctr.validaUser(getApplicationContext(), u)){
+		if(ctr.validateUser(getApplicationContext(), u)){
 			App.setUsername(edtUser);
 			App.setCart(new Cart());
 		}
