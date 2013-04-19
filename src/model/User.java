@@ -1,13 +1,29 @@
 package model;
 
 public class User {
-	private String login;
+	private String id;
+	private String login;//email
 	private String pass;
 	
 	
 	
 	public User() {
 		super();
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public User(String login, String pass, String id) {
+		super();
+		this.login = login;
+		this.pass = pass;
+		this.id = id;
 	}
 	public User(String login, String pass) {
 		super();
