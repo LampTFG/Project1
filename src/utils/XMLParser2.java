@@ -73,11 +73,11 @@ public class XMLParser2 {
 			if(name.equals("id")){
 				productID = readID(parser);
 			}else if(name.equals("name")){
-				productName = readName(parser);
+				productName = readInnerTag(parser, name);
 			}else if(name.equals("description")){
-				longDesc = readDescription(parser);
+				longDesc = readInnerTag(parser, name);
 			}else if(name.equals("description_short")){
-				shortDesc = readShortDesc(parser);
+				shortDesc = readInnerTag(parser, name);
 			}else if(name.equals("price")){
 				price = readPrice(parser);
 			}else{
@@ -87,6 +87,7 @@ public class XMLParser2 {
 		return new Product(Integer.parseInt(productID),Float.parseFloat(price), shortDesc,longDesc,productName);
 	}
 	
+	//Read the price tag
 	private String readPrice(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, ns, "price");
 		String price = readText(parser);
@@ -95,8 +96,9 @@ public class XMLParser2 {
 		return price;
 	}
 	
-	private String readName(XmlPullParser parser) throws XmlPullParserException, IOException {
-		parser.require(XmlPullParser.START_TAG, ns, "name");
+	//Used to read an inner tag named language, it always read the first language
+	private String readInnerTag(XmlPullParser parser, String tag) throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, ns, tag);
 		String prodName = null;
 			
 		while(parser.next() != XmlPullParser.END_TAG){
@@ -114,48 +116,7 @@ public class XMLParser2 {
 		}
 		return prodName;
 	}
-	
-	private String readShortDesc(XmlPullParser parser) throws XmlPullParserException, IOException {
-		parser.require(XmlPullParser.START_TAG, ns, "description_short");
-		String shortDesc = null;
-			
-		while(parser.next() != XmlPullParser.END_TAG){
-			if(parser.getEventType() != XmlPullParser.START_TAG){
-				continue;
-			}
-			String name = parser.getName();
-			//System.out.println("readDesc:  "+ parser.getName());
-			if(name.equals("language") && language == 1){
-				shortDesc = readLanguage(parser);
-				language = 0;
-			}else{
-				skip(parser);
-			}
-		}
-		return shortDesc;
-	}
-	
-	//Read desc of product info from XML
-	private String readDescription(XmlPullParser parser) throws XmlPullParserException, IOException {
-		parser.require(XmlPullParser.START_TAG, ns, "description");
-		String description = null;
-			
-		while(parser.next() != XmlPullParser.END_TAG){
-			if(parser.getEventType() != XmlPullParser.START_TAG){
-				continue;
-			}
-			String name = parser.getName();
-			//System.out.println("readDesc:  "+ parser.getName());
-			if(name.equals("language") && language == 1){
-				description = readLanguage(parser);
-				language = 0;
-			}else{
-				skip(parser);
-			}
-		}
-		return description;
-	}
-		
+	//Read the language ag
 	private String readLanguage(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, ns, "language");
 		String lang = android.text.Html.fromHtml(readText(parser)).toString();
@@ -198,7 +159,7 @@ public class XMLParser2 {
 		else
 			return new User(customerID,login,passwd,firstname,lastname);
 	}
-	
+	//Read the tag id
 	private String readID(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, ns, "id");
 		String id = readText(parser);
