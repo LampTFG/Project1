@@ -2,7 +2,6 @@ package utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +19,8 @@ public class XMLParser2 {
 	public static final int GET_CUSTOMER_BY_EMAIL = 1;
 	public static final int GET_CUSTOMER_BY_ID = 2;
 	public static final int GET_PRODUCT_BY_ID = 2;
+	
+	private static int language =0;
 	
     public List parse(InputStream in, int option) throws XmlPullParserException, IOException {
         try {
@@ -66,8 +67,9 @@ public class XMLParser2 {
 			if(parser.getEventType() != XmlPullParser.START_TAG){
 				continue;
 			}
+			language=1;
 			String name = parser.getName();
-			//System.out.println("readCustomer parser getName: "+ parser.getName());
+			System.out.println("readCustomer parser getName: "+ parser.getName());
 			if(name.equals("id")){
 				productID = readID(parser);
 			}else if(name.equals("name")){
@@ -103,8 +105,9 @@ public class XMLParser2 {
 			}
 			String name = parser.getName();
 			//System.out.println("readDesc:  "+ parser.getName());
-			if(name.equals("language")){
+			if(name.equals("language") && language == 1){
 				prodName = readLanguage(parser);
+				language = 0;
 			}else{
 				skip(parser);
 			}
@@ -122,8 +125,9 @@ public class XMLParser2 {
 			}
 			String name = parser.getName();
 			//System.out.println("readDesc:  "+ parser.getName());
-			if(name.equals("language")){
+			if(name.equals("language") && language == 1){
 				shortDesc = readLanguage(parser);
+				language = 0;
 			}else{
 				skip(parser);
 			}
@@ -142,8 +146,9 @@ public class XMLParser2 {
 			}
 			String name = parser.getName();
 			//System.out.println("readDesc:  "+ parser.getName());
-			if(name.equals("language")){
+			if(name.equals("language") && language == 1){
 				description = readLanguage(parser);
+				language = 0;
 			}else{
 				skip(parser);
 			}
