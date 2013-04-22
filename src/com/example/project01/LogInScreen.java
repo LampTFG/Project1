@@ -42,4 +42,10 @@ public class LogInScreen extends Activity{
 			DialogManager.showErrorMessage(this, "Erro", "Wrong username or password");
 		}
     }
+	
+	//Sign up listener
+	public void sendToRegistration(View v){
+		Intent i = new Intent(Views.customerRegistrationIntent);
+		LogInScreen.this.startActivity(i);
+	}
 }
