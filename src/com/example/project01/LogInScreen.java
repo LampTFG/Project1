@@ -46,6 +46,6 @@ public class LogInScreen extends Activity{
 	//Sign up listener
 	public void sendToRegistration(View v){
 		Intent i = new Intent(Views.customerRegistrationIntent);
-		LogInScreen.this.startActivity(i);
+		startActivity(i);
 	}
 }

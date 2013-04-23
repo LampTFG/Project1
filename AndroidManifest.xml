@@ -90,6 +90,11 @@
         <activity
             android:name="com.example.project01.CustomerRegistration"
             android:label="@string/title_activity_customer_registration" >
+            <intent-filter>
+                <action android:name="com.example.project01.CustomerRegistration" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

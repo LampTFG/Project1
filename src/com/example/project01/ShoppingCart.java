@@ -72,7 +72,7 @@ public class ShoppingCart extends Activity {
 	        	tr.addView(tv);
 	        	tv = FunctionsView.makeTableView(this,Integer.toString(si.getQtd()),i);
 	        	tr.addView(tv);
-	        	tv = FunctionsView.makeTableView(this,"xxxx",i);
+	        	tv = FunctionsView.makeTableView(this,Float.toString(si.getPrice()),i);
 	            tr.addView(tv);
 	            //
 	            tl.addView(tr,tableParams);
