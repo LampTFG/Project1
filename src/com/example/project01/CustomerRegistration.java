@@ -1,5 +1,10 @@
 package com.example.project01;
 
+import java.io.File;
+
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
+
 import model.User;
 import android.os.Bundle;
 import android.app.Activity;
@@ -40,6 +45,18 @@ public class CustomerRegistration extends Activity {
 		String lastname = lastnametv.getText().toString();
 		
 		User u = new User();
+		u.setId("1");
+		u.setPass(passwd);
+		
+		File result = new File(getFilesDir().getPath()+"/customer.xml");
+		System.out.println(getFilesDir()+"/customer.xml");
+		try {
+			Serializer serializer = new Persister();
+			serializer.write(u, result);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }

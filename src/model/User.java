@@ -1,10 +1,22 @@
 package model;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
+@Root
 public class User {
+	@Element
 	private String id;
-	private String login;//email
+	
+	@Element(name="passwd")
 	private String pass;
+	
+	@Element(name="email")
+	private String login;//email
+	
+	@Element
 	private String firstname;
+	@Element
 	private String lastname;
 	
 
