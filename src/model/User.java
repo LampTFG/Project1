@@ -1,22 +1,28 @@
 package model;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;
 
-@Root
+@Root(name="prestashop")
 public class User {
+	
 	@Element
+	@Path("customer")
 	private String id;
 	
 	@Element(name="passwd")
+	@Path("customer")
 	private String pass;
 	
 	@Element(name="email")
 	private String login;//email
 	
 	@Element
+	@Path("customer")
 	private String firstname;
 	@Element
+	@Path("customer")
 	private String lastname;
 	
 
