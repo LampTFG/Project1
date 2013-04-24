@@ -23,8 +23,8 @@ public class Cart {
 	public void setCart(ArrayList<ShopItem> cart) {
 		this.cart = cart;
 	}
-	public void addItem(int idProd, int qtd){
-		cart.add(new ShopItem(idProd, qtd));
+	public void addItem(int idProd, int qtd, float price){
+		cart.add(new ShopItem(idProd, qtd, price));
 	}
 	public void addItem(ShopItem si){
 		cart.add(si);

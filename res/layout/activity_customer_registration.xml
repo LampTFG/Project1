@@ -10,12 +10,12 @@
         android:layout_height="50dp"
         android:layout_gravity="bottom" >
         <TextView
-            android:id="@+id/lblLoginScreen"
+            android:id="@+id/lblCustomerRegistration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Login Screen" 
+            android:text="Registration" 
             style="@style/title" />
 
     </LinearLayout>
@@ -27,21 +27,19 @@
         android:layout_height="wrap_content" >
  
         <TextView
-            android:id="@+id/lblUser"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:gravity="right"
+            android:gravity="left"
             style="@style/label"
-            android:text="User:" />
+            android:text="Email: " />
      
         <EditText
-            android:id="@+id/edtUser"
+            android:id="@+id/email_cutomer_registration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:hint="user"
-            android:text="fmammoli@gmail.com"
+            android:hint="ex: me@gmail.com"
             style="@style/input"
             android:background="@drawable/round_button"
             android:paddingLeft="10dp" />
@@ -56,20 +54,19 @@
         android:paddingTop="5dp">
  
         <TextView
-            android:id="@+id/lblPass"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:gravity="right"
+            android:gravity="left"
             style="@style/label"
             android:text="Pass:" />
      
         <EditText
-            android:id="@+id/edtPass"
+            android:id="@+id/passwd_customer_registration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:hint="pass"
+            android:hint="password"
             style="@style/input"
             android:background="@drawable/round_button"
             android:paddingLeft="10dp"
@@ -78,25 +75,74 @@
     </LinearLayout>
  
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/linearLayout6"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:paddingTop="5dp">
+ 
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            style="@style/label"
+            android:text="Name:" />
+     
+        <EditText
+            android:id="@+id/first_name_customer_registration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:hint="First Name"
+            style="@style/input"
+            android:background="@drawable/round_button"
+            android:paddingLeft="10dp"/>
+ 
+    </LinearLayout>
+ 	
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:paddingTop="5dp">
+ 
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="1dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            style="@style/label"
+            android:text="Last Name:" />
+     
+        <EditText
+            android:id="@+id/last_name_customer_registration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:hint="Last Name"
+            style="@style/input"
+            android:background="@drawable/round_button"
+            android:paddingLeft="10dp"/>
+ 
+    </LinearLayout>
+ 
+    
+    <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="fill_parent"
         android:layout_height="78dp"
         android:layout_gravity="bottom" >
          
         <Button
-            android:id="@+id/btnConfirmar"
+            android:id="@+id/confirm_btn_customer_registration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:onClick="checkLogin"
+            android:onClick="RegisterUser"
             android:text="Confirm" />
-         <Button
-            android:id="@+id/tbn_send_to_registration_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:onClick="sendToRegistration"
-            android:text="Sign up" />
+         
     </LinearLayout>
  
 </LinearLayout>
