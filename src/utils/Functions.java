@@ -21,6 +21,7 @@ public class Functions {
 			resp += strings[i] + ((strings[i].endsWith("/"))?"":"/");
 		}
 		resp += strings[strings.length-1];
+		System.out.println("Concat: "+resp);
 		return resp;
 	}
 	

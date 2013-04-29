@@ -21,6 +21,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import utils.CustomerFormRequester;
+
 import model.*;
 import android.os.Bundle;
 import android.app.Activity;
@@ -104,6 +106,7 @@ public class CustomerRegistration extends Activity {
 			StreamResult resu =  new StreamResult(new File(filepath.getPath()));
 			transformer.transform(source, resu);
 			
+			new CustomerFormRequester().execute(u);
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
