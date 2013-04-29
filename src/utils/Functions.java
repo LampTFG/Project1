@@ -21,7 +21,7 @@ public class Functions {
 			resp += strings[i] + ((strings[i].endsWith("/"))?"":"/");
 		}
 		resp += strings[strings.length-1];
-		System.out.println("Concat: "+resp);
+		System.out.println("Functions#urlConcat-urlString: "+resp);
 		return resp;
 	}
 	

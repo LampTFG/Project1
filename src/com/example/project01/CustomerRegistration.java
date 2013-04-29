@@ -1,27 +1,9 @@
 package com.example.project01;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-import org.simpleframework.xml.stream.Format;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import java.util.concurrent.ExecutionException;
 
 import utils.CustomerFormRequester;
+import utils.DialogManager;
 
 import model.*;
 import android.os.Bundle;
@@ -31,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 
 public class CustomerRegistration extends Activity {
+	
 	private EditText emailtv;
 	private EditText passwdtv;
 	private EditText nametv;
@@ -69,60 +52,20 @@ public class CustomerRegistration extends Activity {
 		u.setFirstname(firstname);
 		u.setLastname(lastname);
 		
-		File result = new File(getFilesDir().getPath()+"/customer.xml");
-		System.out.println(getFilesDir()+"/customer.xml");
 		try {
-			Serializer serializer = new Persister();
-			serializer.write(u, result);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		try {
-			File filepath = new File(getFilesDir().getPath()+"/customer.xml");
-			
-			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-			Document doc = docBuilder.parse(filepath);
-			
-			Node prestashop = doc.getFirstChild();
-			Node customer = doc.getElementsByTagName("customer").item(0);
-			
-			NodeList list = customer.getChildNodes();
-			
-			for(int i=0;i<list.getLength();i++){
-				Node node = list.item(i);
-				
-				if(node.getNodeName().equals("id")){
-					node.setTextContent("5");
-				}
+			Boolean resp = new CustomerFormRequester().execute(u).get();
+			if(resp){
+				this.finish();
+			}else{
+				DialogManager.showErrorMessage(this, "Erro", "Cant create your account, please try again");
 			}
-			
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
-			DOMSource source = new DOMSource(doc);
-			StreamResult resu =  new StreamResult(new File(filepath.getPath()));
-			transformer.transform(source, resu);
-			
-			new CustomerFormRequester().execute(u);
-		} catch (ParserConfigurationException e) {
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TransformerException e) {
+		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+				
 	}
 }
