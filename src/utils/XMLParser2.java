@@ -44,11 +44,11 @@ public class XMLParser2 {
 			}
 			String name = parser.getName();
 			System.out.println("XMLParser2 readPrestashop getName: "+ parser.getName());
-			if(name == "customers"){//when you resquest a user by email
+			if(name.equals("customers")){//when you resquest a user by email
 				entries.add(readCustomers(parser));
-			}else if(name == "customer"){//when you request a user by id
+			}else if(name.equals("customer")){//when you request a user by id
 				entries.add(readCustomer(parser));
-			}else if(name == "product"){//when request a product by id
+			}else if(name.equals("product")){//when request a product by id
 				entries.add(readProduct(parser));
 			}
 		}
