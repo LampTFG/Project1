@@ -1,6 +1,11 @@
 package com.example.project01;
 
-import model.User;
+import java.util.concurrent.ExecutionException;
+
+import utils.CustomerFormRequester;
+import utils.DialogManager;
+
+import model.*;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -8,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 
 public class CustomerRegistration extends Activity {
+	
 	private EditText emailtv;
 	private EditText passwdtv;
 	private EditText nametv;
@@ -40,6 +46,26 @@ public class CustomerRegistration extends Activity {
 		String lastname = lastnametv.getText().toString();
 		
 		User u = new User();
+		u.setId("1");
+		u.setLogin(email);
+		u.setPass(passwd);
+		u.setFirstname(firstname);
+		u.setLastname(lastname);
 		
+		try {
+			Boolean resp = new CustomerFormRequester().execute(u).get();
+			if(resp){
+				this.finish();
+			}else{
+				DialogManager.showErrorMessage(this, "Erro", "Cant create your account, please try again");
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
 	}
 }
