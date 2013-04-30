@@ -31,8 +31,7 @@ public class Functions {
 	 * @return            	
 	 */
 	public static void logOut() {
-		App.setPassword("");
-		App.setUsername("");
+		App.setUser(null);
 		App.setCart(new Cart());
 	}
 	

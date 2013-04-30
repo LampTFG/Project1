@@ -31,9 +31,9 @@ public class LogInScreen extends Activity{
 		User u = new User(edtUser, Functions.md5(edtPass));
 		CtrLogin ctr = new CtrLogin();
 		Intent i = new Intent(Views.welcomeIntent);
-		if(ctr.validateUser(getApplicationContext(), u)){
-			App.setUsername(edtUser);
-			App.setCart(new Cart());
+		User regUser = ctr.validateUser(getApplicationContext(), u); 
+		if(regUser!=null){
+			App.setUser(regUser);
 		}
 		if(App.isLoged()){
 			LogInScreen.this.startActivity(i);

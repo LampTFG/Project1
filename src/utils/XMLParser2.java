@@ -44,11 +44,11 @@ public class XMLParser2 {
 			}
 			String name = parser.getName();
 			System.out.println("XMLParser2 readPrestashop getName: "+ parser.getName());
-			if(name == "customers"){//when you resquest a user by email
+			if(name.equals("customers")){//when you resquest a user by email
 				entries.add(readCustomers(parser));
-			}else if(name == "customer"){//when you request a user by id
+			}else if(name.equals("customer")){//when you request a user by id
 				entries.add(readCustomer(parser));
-			}else if(name == "product"){//when request a product by id
+			}else if(name.equals("product")){//when request a product by id
 				entries.add(readProduct(parser));
 			}
 		}
@@ -133,6 +133,7 @@ public class XMLParser2 {
 		String lastname = null;
 		String login= null;
 		String passwd = null;
+		String email = null;
 		
 		while(parser.next() != XmlPullParser.END_TAG){
 			if(parser.getEventType() != XmlPullParser.START_TAG){
@@ -143,11 +144,11 @@ public class XMLParser2 {
 			if(name.equals("id")){
 				customerID = readID(parser);
 			}else if(name.equals("firstname")){
-				login = readFirstName(parser);
+				firstname = readFirstName(parser);
 			}else if(name.equals("lastname")){
 				lastname = readLastName(parser);
 			}else if(name.equals("email")){
-				login = readEmail(parser);
+				email = readEmail(parser);
 			}else if(name.equals("passwd")){
 				passwd = readPassword(parser);
 			}else{
@@ -157,7 +158,7 @@ public class XMLParser2 {
 		if(customerID.equals(null))
 			return null;
 		else
-			return new User(customerID,login,passwd,firstname,lastname);
+			return new User(customerID,passwd,firstname,lastname, email);
 	}
 	//Read the tag id
 	private String readID(XmlPullParser parser) throws XmlPullParserException, IOException{
