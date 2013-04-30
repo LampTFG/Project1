@@ -53,6 +53,7 @@ public class Welcome extends Activity  {
         MyGridAdapter a = new MyGridAdapter(mAdapter);
         mListView.setAdapter(a);
         mAdapter.add("https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash3/549445_455717007829988_666626422_n.jpg");
+        //mAdapter.add(App.getUser().getImagePath());
 	}
 
 	public void onResume(){

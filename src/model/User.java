@@ -15,6 +15,10 @@ public class User {
 	@Path("customer")
 	private String pass;
 	
+	@Element(name="imagePath")
+	@Path("customer")
+	private String imagePath;
+	
 	@Element
 	@Path("customer")
 	private String firstname;
@@ -104,6 +108,14 @@ public class User {
 	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getImagePath() {
+		return imagePath;
+	}
+	
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	
