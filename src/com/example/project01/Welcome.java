@@ -1,31 +1,20 @@
 package com.example.project01;
 
-
-import java.util.ArrayList;
-
 import utils.DialogManager; 
 import utils.Functions;
 import utils.Vars;
 import utils.Views;
 import utils.session.App;
-import utils.urlimageviewhelper.UrlImageViewCallback;
-import utils.urlimageviewhelper.UrlImageViewHelper;
+import utils.urlimageviewhelper.MyAdapter;
+import utils.urlimageviewhelper.MyGridAdapter;
 import zxingHelpers.IntentIntegrator;
 import zxingHelpers.IntentResult;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.animation.ScaleAnimation;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -52,7 +41,7 @@ public class Welcome extends Activity  {
 		//profile Image
 		mListView = (ListView)findViewById(R.id.results);
         mAdapter = new MyAdapter(this);
-        MyGridAdapter a = new MyGridAdapter(mAdapter);
+        MyGridAdapter a = new MyGridAdapter(mAdapter, this);
         mListView.setAdapter(a);
         mAdapter.add("https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash3/549445_455717007829988_666626422_n.jpg");
         //mAdapter.add(App.getUser().getImagePath());
@@ -121,99 +110,4 @@ public class Welcome extends Activity  {
 			Welcome.this.finish();
 		}
 	}
-
-	
-	//Profile Image
-	private class MyAdapter extends ArrayAdapter<String> {
-
-        public MyAdapter(Context context) {
-            super(context, 0);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView iv;
-            if (convertView == null)
-                convertView = getLayoutInflater().inflate(R.layout.image, null);
-
-            iv = (ImageView)convertView.findViewById(R.id.image);
-            
-            iv.setAnimation(null);
-            // yep, that's it. it handles the downloading and showing an interstitial image automagically.
-            UrlImageViewHelper.setUrlDrawable(iv, getItem(position), R.drawable.transparent, new UrlImageViewCallback() {
-                @Override
-                public void onLoaded(ImageView imageView, Bitmap loadedBitmap, String url, boolean loadedFromCache) {
-                    if (!loadedFromCache) {
-                        ScaleAnimation scale = new ScaleAnimation(0, 1, 0, 1, ScaleAnimation.RELATIVE_TO_SELF, .5f, ScaleAnimation.RELATIVE_TO_SELF, .5f);
-                        scale.setDuration(140);
-                        imageView.startAnimation(scale);
-                    }
-                }
-            });
-
-            return convertView;
-        }
-    }
-	private class MyGridAdapter extends BaseAdapter {
-        public MyGridAdapter(Adapter adapter) {
-            mAdapter = adapter;
-            mAdapter.registerDataSetObserver(new DataSetObserver() {
-                @Override
-                public void onChanged() {
-                    super.onChanged();
-                    notifyDataSetChanged();
-                }
-                @Override
-                public void onInvalidated() {
-                    super.onInvalidated();
-                    notifyDataSetInvalidated();
-                }
-            });
-        }
-        Adapter mAdapter;
-        
-        @Override
-        public int getCount() {
-            return (int)Math.ceil((double)mAdapter.getCount() / 4d);
-        }
-
-        @Override
-        public Row getItem(int position) {
-            Row row = new Row();
-            for (int i = position * 1; i < 1; i++) {
-                if (mAdapter.getCount() < i)
-                    row.add(mAdapter.getItem(i));
-                else
-                    row.add(null);
-            }
-            return row;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater().inflate(R.layout.row, null);
-            LinearLayout row = (LinearLayout)convertView;
-            LinearLayout l = (LinearLayout)row.getChildAt(0);
-            for (int child = 0; child < 1; child++) {
-                int i = position * 1 + child;
-                LinearLayout c = (LinearLayout)l.getChildAt(child);
-                c.removeAllViews();
-                if (i < mAdapter.getCount()) {
-                    c.addView(mAdapter.getView(i, null, null));
-                }
-            }
-            
-            return convertView;
-        }
-        
-    }
-	private class Row extends ArrayList {
-        
-    }
-	
 }
