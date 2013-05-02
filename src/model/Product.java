@@ -7,11 +7,12 @@ public class Product implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	int id;
-	float price;
-	String shortDesc;
-	String longDesc;
-	String name;
+	private int id;
+	private float price;
+	private String shortDesc;
+	private String longDesc;
+	private String name;
+	private String imagePath;
 	
 	
 	public Product() {
@@ -19,13 +20,14 @@ public class Product implements Serializable{
 	}
 
 	public Product(int id, float price, String shortDesc, String longDesc,
-			String name) {
+			String name, String imagePath) {
 		super();
 		this.id = id;
 		this.price = price;
 		this.shortDesc = shortDesc;
 		this.longDesc = longDesc;
 		this.name = name;
+		this.imagePath = imagePath;
 	}
 
 	public String toString(){
@@ -63,7 +65,13 @@ public class Product implements Serializable{
 	public void setLongDesc(String longDesc) {
 		this.longDesc = longDesc;
 	}
-	
-	
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 	
 }
