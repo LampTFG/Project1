@@ -114,6 +114,13 @@ public class Functions {
 		return null;
 	}
 
+	/**
+	 * Boolean function who says if the user is connect to Internet, by 3G or Wifi
+	 * 
+	 * @param Contex
+	 *            current activity
+	 * @return true or false / connected or not
+	 */
 	public static boolean isConnected(Context context) {
 		try {
 			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
