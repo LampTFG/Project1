@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import utils.DialogManager; 
 import utils.Functions;
+import utils.Vars;
 import utils.Views;
 import utils.session.App;
 import utils.urlimageviewhelper.UrlImageViewCallback;
@@ -16,6 +17,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +83,11 @@ public class Welcome extends Activity  {
 
 	public void checkHistory(View v) {
 		Intent i = new Intent(Views.historyIntent);
+		Welcome.this.startActivity(i);
+	}
+	
+	public void editProfile(View v) {
+		Intent i=new Intent(Intent.ACTION_VIEW,Uri.parse(Vars.editProfile));
 		Welcome.this.startActivity(i);
 	}
 
