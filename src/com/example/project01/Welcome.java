@@ -76,8 +76,11 @@ public class Welcome extends Activity  {
 	}
 	
 	public void editProfile(View v) {
-		Intent i=new Intent(Intent.ACTION_VIEW,Uri.parse(Vars.editProfile));
-		Welcome.this.startActivity(i);
+		if(Functions.isConnected(this)){
+			Intent i=new Intent(Intent.ACTION_VIEW,Uri.parse(Vars.editProfile));
+			Welcome.this.startActivity(i);
+		}else
+			DialogManager.notOnlineUser(this);
 	}
 
 	public void checkCart(View v) {
@@ -86,8 +89,11 @@ public class Welcome extends Activity  {
 	}
 
 	public void scanQRCode(View v) {
-		IntentIntegrator integrator = new IntentIntegrator(this);
-		integrator.initiateScan();
+		if(Functions.isConnected(this)){
+			IntentIntegrator integrator = new IntentIntegrator(this);
+			integrator.initiateScan();
+		}else
+			DialogManager.notOnlineUser(this);
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
