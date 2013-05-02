@@ -1,18 +1,17 @@
 package com.example.project01;
 
 
+import model.User;
 import utils.DialogManager;
 import utils.Functions;
-import utils.Views; 
+import utils.Views;
 import utils.session.App;
-import model.Cart;
-import model.User;
-import controller.CtrLogin;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import controller.CtrLogin;
 
 public class LogInScreen extends Activity{
 

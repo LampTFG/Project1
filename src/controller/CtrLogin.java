@@ -2,16 +2,10 @@ package controller;
 
 import java.util.concurrent.ExecutionException;
 
-import utils.CustomerRequester;
-import utils.Functions;
-import utils.session.App;
 import model.User;
+import utils.CustomerRequester;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
-import dataBase.DBConn2;
 
 /*
  * User enter email and pass
