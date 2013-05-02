@@ -2,7 +2,7 @@ package com.example.project01;
 
 import java.util.concurrent.ExecutionException;
 
-import utils.CustomerFormRequester;
+import utils.CustomerCreator;
 import utils.DialogManager;
 
 import model.*;
@@ -53,7 +53,7 @@ public class CustomerRegistration extends Activity {
 		u.setLastname(lastname);
 		
 		try {
-			Boolean resp = new CustomerFormRequester().execute(u).get();
+			Boolean resp = new CustomerCreator().execute(u).get();
 			if(resp){
 				this.finish();
 			}else{
