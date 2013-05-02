@@ -133,6 +133,7 @@ public class XMLParser2 {
 		String lastname = null;
 		String login= null;
 		String passwd = null;
+		String email = null;
 		
 		while(parser.next() != XmlPullParser.END_TAG){
 			if(parser.getEventType() != XmlPullParser.START_TAG){
@@ -143,11 +144,11 @@ public class XMLParser2 {
 			if(name.equals("id")){
 				customerID = readID(parser);
 			}else if(name.equals("firstname")){
-				login = readFirstName(parser);
+				firstname = readFirstName(parser);
 			}else if(name.equals("lastname")){
 				lastname = readLastName(parser);
 			}else if(name.equals("email")){
-				login = readEmail(parser);
+				email = readEmail(parser);
 			}else if(name.equals("passwd")){
 				passwd = readPassword(parser);
 			}else{
@@ -157,7 +158,7 @@ public class XMLParser2 {
 		if(customerID.equals(null))
 			return null;
 		else
-			return new User(customerID,login,passwd,firstname,lastname);
+			return new User(customerID,passwd,firstname,lastname, email);
 	}
 	//Read the tag id
 	private String readID(XmlPullParser parser) throws XmlPullParserException, IOException{

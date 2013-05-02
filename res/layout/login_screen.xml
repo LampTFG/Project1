@@ -73,6 +73,7 @@
             style="@style/input"
             android:background="@drawable/round_button"
             android:paddingLeft="10dp"
+            android:text="12345"
             android:password="true" />
  
     </LinearLayout>

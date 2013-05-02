@@ -2,15 +2,10 @@ package controller;
 
 import java.util.concurrent.ExecutionException;
 
-import utils.CustomerRequester;
-import utils.Functions;
 import model.User;
+import utils.CustomerRequester;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
-import dataBase.DBConn2;
 
 /*
  * User enter email and pass
@@ -23,7 +18,7 @@ import dataBase.DBConn2;
 
 public class CtrLogin {
 	
-	public boolean validateUser(Context context, User u){
+	public User validateUser(Context context, User u){
 		try {
 			
 			//It request an user by its email/login
@@ -31,10 +26,8 @@ public class CtrLogin {
 			
 			if(regUser != null){
 				Log.d("CtrLogin", "user is valid!");
-				return true;
+				return regUser;
 			}
-			else
-				return false;
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,6 +36,6 @@ public class CtrLogin {
 			e.printStackTrace();
 		}
 		
-		return false;
+		return null;
 	}
 }
