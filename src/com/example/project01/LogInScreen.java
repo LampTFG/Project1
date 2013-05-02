@@ -44,7 +44,11 @@ public class LogInScreen extends Activity{
 	
 	//Sign up listener
 	public void sendToRegistration(View v){
-		Intent i = new Intent(Views.customerRegistrationIntent);
-		startActivity(i);
+		if(Functions.isConnected(this)){
+			Intent i = new Intent(Views.customerRegistrationIntent);
+			startActivity(i);
+		}else
+			DialogManager.notOnlineUser(this);
+			
 	}
 }
