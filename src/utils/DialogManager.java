@@ -24,4 +24,13 @@ public class DialogManager {
 			       });
 		builder.show();
 	}
+	
+	/**
+	 * popUp for not online users
+	 *
+	 * @param act			Activity Screen
+	 */
+	public static void notOnlineUser(Activity act) {
+		showErrorMessage(act, "Not Online", "You must be online to reach this page");
+	}
 }

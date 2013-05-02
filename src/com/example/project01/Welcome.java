@@ -2,32 +2,51 @@ package com.example.project01;
 
 import utils.DialogManager; 
 import utils.Functions;
+import utils.Vars;
 import utils.Views;
 import utils.session.App;
+import utils.urlimageviewhelper.MyAdapter;
+import utils.urlimageviewhelper.MyGridAdapter;
 import zxingHelpers.IntentIntegrator;
 import zxingHelpers.IntentResult;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.view.ViewGroup.MarginLayoutParams;
-import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class Welcome extends Activity  {
 	String respText;
 	String barcord;
+	private MyAdapter mAdapter;
+	private ListView mListView;
 
 	@Override
 	protected synchronized void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.telaboasvindas);
+		fillProfileInfo();
 	}
 	
+	private void fillProfileInfo() {
+		TextView fullName = (TextView)findViewById(R.id.fullName);
+		fullName.setText(App.getUser().getFirstname()+" "+App.getUser().getLastname());
+		TextView email = (TextView)findViewById(R.id.emailUser);
+		email.setText(App.getUser().getEmail());
+		//profile Image
+		mListView = (ListView)findViewById(R.id.results);
+        mAdapter = new MyAdapter(this);
+        MyGridAdapter a = new MyGridAdapter(mAdapter, this);
+        mListView.setAdapter(a);
+        mAdapter.add("https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash3/549445_455717007829988_666626422_n.jpg");
+        //mAdapter.add(App.getUser().getImagePath());
+	}
+
 	public void onResume(){
 		super.onResume();
 		populateGallery();
@@ -55,6 +74,14 @@ public class Welcome extends Activity  {
 		Intent i = new Intent(Views.historyIntent);
 		Welcome.this.startActivity(i);
 	}
+	
+	public void editProfile(View v) {
+		if(Functions.isConnected(this)){
+			Intent i=new Intent(Intent.ACTION_VIEW,Uri.parse(Vars.editProfile));
+			Welcome.this.startActivity(i);
+		}else
+			DialogManager.notOnlineUser(this);
+	}
 
 	public void checkCart(View v) {
 		Intent i = new Intent(Views.shoppingCartIntent);
@@ -62,8 +89,11 @@ public class Welcome extends Activity  {
 	}
 
 	public void scanQRCode(View v) {
-		IntentIntegrator integrator = new IntentIntegrator(this);
-		integrator.initiateScan();
+		if(Functions.isConnected(this)){
+			IntentIntegrator integrator = new IntentIntegrator(this);
+			integrator.initiateScan();
+		}else
+			DialogManager.notOnlineUser(this);
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -71,7 +101,6 @@ public class Welcome extends Activity  {
 		
 		if (scanResult != null && scanResult.getContents() != null) {
 			barcord = scanResult.getContents();
-			System.out.println("Welcome - Value: " + barcord);
 			if(Functions.isCodeValid(barcord)){
 				System.out.println("Welcome -Codigo Valido: "+Functions.productDecrypt(barcord));
 				int prodID = Functions.productDecrypt(barcord);

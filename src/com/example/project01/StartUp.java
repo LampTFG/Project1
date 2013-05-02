@@ -93,11 +93,6 @@ public class StartUp extends Activity {
 					// controls.
 					controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
 				}
-
-				if (visible && AUTO_HIDE) {
-					// Schedule a hide().
-					delayedHide(AUTO_HIDE_DELAY_MILLIS);
-				}
 			}
 		});
 

@@ -63,7 +63,7 @@ public class Response {
 		InputStream in = null;
 		try {
 			URL url = new URL(get_url);
-			System.out.println("Tentando acessar: "+get_url);
+			System.out.println("Response: Tentando acessar: "+get_url);
 			URLConnection conn = url.openConnection();
 			conn.connect();
 			/* conn. */
