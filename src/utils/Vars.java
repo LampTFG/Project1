@@ -13,10 +13,10 @@ public class Vars {
 	//For remote access
 	public static String wsServer = "http://www.site1366132944.hospedagemdesites.ws/";
 	
-	//For local Access
-	//public static String wsServer = "http://192.168.1.108";
+	//webService
 	public static String wsCustomersPath = "store/api/customers";
 	public static String wsProductPath = "store/api/products";
 	
-	//
+	//editProfile
+	public static String editProfile = "http://www.site1366132944.hospedagemdesites.ws/store/index.php?controller=authentication&back=my-account";
 }
