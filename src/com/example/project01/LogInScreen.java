@@ -1,17 +1,17 @@
 package com.example.project01;
 
 
-import utils.DialogManager;
-import utils.Views; 
-import utils.session.App;
-import model.Cart;
 import model.User;
-import controller.CtrLogin;
+import utils.DialogManager;
+import utils.Functions;
+import utils.Views;
+import utils.session.App;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import controller.CtrLogin;
 
 public class LogInScreen extends Activity{
 
@@ -27,12 +27,12 @@ public class LogInScreen extends Activity{
         // Edits
     	String edtUser = ((EditText) findViewById(R.id.edtUser)).getText().toString();
 		String edtPass = ((EditText) findViewById(R.id.edtPass)).getText().toString();
-		User u = new User(edtUser, edtPass);
+		User u = new User(edtUser, Functions.md5(edtPass));
 		CtrLogin ctr = new CtrLogin();
 		Intent i = new Intent(Views.welcomeIntent);
-		if(ctr.validaUser(getApplicationContext(), u)){
-			App.setUsername(edtUser);
-			App.setCart(new Cart());
+		User regUser = ctr.validateUser(getApplicationContext(), u); 
+		if(regUser!=null){
+			App.setUser(regUser);
 		}
 		if(App.isLoged()){
 			LogInScreen.this.startActivity(i);
@@ -41,4 +41,14 @@ public class LogInScreen extends Activity{
 			DialogManager.showErrorMessage(this, "Erro", "Wrong username or password");
 		}
     }
+	
+	//Sign up listener
+	public void sendToRegistration(View v){
+		if(Functions.isConnected(this)){
+			Intent i = new Intent(Views.customerRegistrationIntent);
+			startActivity(i);
+		}else
+			DialogManager.notOnlineUser(this);
+			
+	}
 }

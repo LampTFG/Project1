@@ -2,10 +2,10 @@ package utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Product;
 import model.User;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -18,8 +18,11 @@ public class XMLParser2 {
 	private static final String ns = null;
 	public static final int GET_CUSTOMER_BY_EMAIL = 1;
 	public static final int GET_CUSTOMER_BY_ID = 2;
-	   
-    public List parse(InputStream in, int option) throws XmlPullParserException, IOException {
+	public static final int GET_PRODUCT_BY_ID = 2;
+	
+	private static int language =0;
+	
+    public List<Object> parse(InputStream in, int option) throws XmlPullParserException, IOException {
         try {
             XmlPullParser parser = Xml.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -31,8 +34,8 @@ public class XMLParser2 {
         }
     }
 	
-	private List readPrestashop(XmlPullParser parser, int option) throws XmlPullParserException, IOException {
-		List entries = new ArrayList();
+	private List<Object> readPrestashop(XmlPullParser parser, int option) throws XmlPullParserException, IOException {
+		List<Object> entries = new ArrayList<Object>();
 		
 		parser.require(XmlPullParser.START_TAG, ns, "prestashop");
 		while(parser.next() != XmlPullParser.END_TAG){
@@ -40,22 +43,80 @@ public class XMLParser2 {
 				continue;
 			}
 			String name = parser.getName();
-			System.out.println("parser getName: "+ parser.getName());
-			if(name == "customers"){//when you resquest a user by email
+			System.out.println("XMLParser2 readPrestashop getName: "+ parser.getName());
+			if(name.equals("customers")){//when you resquest a user by email
 				entries.add(readCustomers(parser));
-			}else if(name == "customer"){//when you request a user by id
+			}else if(name.equals("customer")){//when you request a user by id
 				entries.add(readCustomer(parser));
+			}else if(name.equals("product")){//when request a product by id
+				entries.add(readProduct(parser));
 			}
 		}
 		return entries;
 	}
+	//Read product info from XML
+	private Product readProduct(XmlPullParser parser) throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, ns, "product");
+		String productID=null;
+		String productName = null;
+		String shortDesc = null;
+		String longDesc = null;
+		String price = null;
+		String imagePath = null;
+		
+		while(parser.next() != XmlPullParser.END_TAG){
+			if(parser.getEventType() != XmlPullParser.START_TAG){
+				continue;
+			}
+			language=1;
+			String name = parser.getName();
+			if(name.equals("id")){
+				productID = readTag(parser,"id");
+			}else if(name.equals("name")){
+				productName = readInnerTag(parser, name);
+			}else if(name.equals("description")){
+				longDesc = readInnerTag(parser, name);
+			}else if(name.equals("description_short")){
+				shortDesc = readInnerTag(parser, name);
+			}else if(name.equals("price")){
+				price = readTag(parser,"price");
+			}else if(name.equals("association")){
+				imagePath = readInnerTag(parser, "image");
+			}else{
+				skip(parser);
+			}
+		}
+		return new Product(Integer.parseInt(productID),Float.parseFloat(price), shortDesc,longDesc,productName, imagePath);
+	}
 	
-	//Read all data from a customer
+	//Used to read an inner tag named language, it always read the first language
+	private String readInnerTag(XmlPullParser parser, String tag) throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, ns, tag);
+		String prodName = null;
+			
+		while(parser.next() != XmlPullParser.END_TAG){
+			if(parser.getEventType() != XmlPullParser.START_TAG){
+				continue;
+			}
+			String name = parser.getName();
+			if(name.equals("language") && language == 1){
+				prodName = readTag(parser,"language");
+				language = 0;
+			}else{
+				skip(parser);
+			}
+		}
+		return prodName;
+	}
+		
+	//Read customer data from XML
 	private User readCustomer(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, "customer");
 		String customerID=null;
-		String login = null;
-		String password = null;
+		String firstname = null;
+		String lastname = null;
+		String passwd = null;
+		String email = null;
 		
 		while(parser.next() != XmlPullParser.END_TAG){
 			if(parser.getEventType() != XmlPullParser.START_TAG){
@@ -64,47 +125,36 @@ public class XMLParser2 {
 			String name = parser.getName();
 			//System.out.println("readCustomer parser getName: "+ parser.getName());
 			if(name.equals("id")){
-				customerID = readID(parser);
+				customerID = readTag(parser,"id");
+			}else if(name.equals("firstname")){
+				firstname = readTag(parser,"firstname");
+			}else if(name.equals("lastname")){
+				lastname = readTag(parser, "lastname");
 			}else if(name.equals("email")){
-				login = readEmail(parser);
+				email = readTag(parser, "email");
 			}else if(name.equals("passwd")){
-				password = readPassword(parser);
+				passwd = readTag(parser, "passwd");
 			}else{
 				skip(parser);
 			}
 		}
-		
-		return new User( login, password, customerID);
+		if(customerID.equals(null))
+			return null;
+		else
+			return new User(customerID,passwd,firstname,lastname, email);
 	}
-	
-	private String readID(XmlPullParser parser) throws XmlPullParserException, IOException{
-		parser.require(XmlPullParser.START_TAG, ns, "id");
+	//Read the tag id
+	private String readTag(XmlPullParser parser, String tag) throws XmlPullParserException, IOException{
+		parser.require(XmlPullParser.START_TAG, ns, tag);
 		String id = readText(parser);
-		System.out.println("readID: "+id);
-		parser.require(XmlPullParser.END_TAG, ns, "id");
+		parser.require(XmlPullParser.END_TAG, ns, tag);
 		return id;
 	}
 	
-	private String readPassword(XmlPullParser parser) throws XmlPullParserException, IOException{
-		parser.require(XmlPullParser.START_TAG, ns, "passwd");
-		String passwd = readText(parser);
-		System.out.println("readPassword: "+passwd);
-		parser.require(XmlPullParser.END_TAG, ns, "passwd");
-		return passwd;
-	}
-	
-	private String readEmail(XmlPullParser parser) throws XmlPullParserException, IOException{
-		parser.require(XmlPullParser.START_TAG, ns, "email");
-		String login = readText(parser);
-		System.out.println("readEmail: "+login);
-		parser.require(XmlPullParser.END_TAG, ns, "email");
-		return login;
-	}
-	
-	//Read the xml returned from ?email= query and return the id of requested user
-	private String readCustomers(XmlPullParser parser) throws XmlPullParserException, IOException {
+	//Read the xml returned from email,passwd query and return the requested user
+	private User readCustomers(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, "customers");
-		String customerID=null;
+		User customer=null;
 		
 		while(parser.next() != XmlPullParser.END_TAG){
 			if(parser.getEventType() != XmlPullParser.START_TAG){
@@ -112,26 +162,15 @@ public class XMLParser2 {
 			}
 			String name = parser.getName();
 			if(name.equals("customer")){
-				customerID = readCustomerID(parser);
+				customer = readCustomer(parser);
 			}else{
 				skip(parser);
 			}
 		}
-		return(customerID);
+		return(customer);
 	}
 	
-	//Read the customer Id from ?email= query
-	private String readCustomerID(XmlPullParser parser) throws XmlPullParserException, IOException{
-		parser.require(XmlPullParser.START_TAG, ns, "customer");
-		String tag = parser.getName();
-		System.out.println("readCustomerID parser getName: "+ parser.getName());
-		String id = parser.getAttributeValue(null, "id");
-		System.out.println("readCustomerID parser id: "+ id);
-		
-		return id;
-	}
-	
-	// For the tags login and password, extracts their text values.
+	// For the tags, extracts their text values.
 	private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
 	    String result = "";
 	    if (parser.next() == XmlPullParser.TEXT) {
@@ -140,7 +179,7 @@ public class XMLParser2 {
 	    }
 	    return result;
 	}
-	
+	//Skips an unwanted tag
 	private void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
 	    if (parser.getEventType() != XmlPullParser.START_TAG) {
 	        throw new IllegalStateException();

@@ -6,6 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
+
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHttpResponse;
 
 import android.app.Activity;
 import android.util.Log;
@@ -18,6 +25,21 @@ public class Response {
 	public Response(String url) {
 		this.get_url = url;
 
+	}
+	
+	public static BasicHttpResponse makePostRequest(String wsPath,String xmlString) throws ClientProtocolException, IOException {
+		String urlSend = Functions.urlConcat(Vars.wsServer,wsPath+"/?ws_key="+Vars.wsKey+"&xml=");
+		
+		String encode = URLEncoder.encode(xmlString, "UTF-8");
+		String out = urlSend.concat(encode);
+		
+		HttpPost post = new HttpPost(out);
+		post.setEntity(new StringEntity(xmlString));
+		
+		DefaultHttpClient client = new DefaultHttpClient();
+		BasicHttpResponse response = (BasicHttpResponse) client.execute(post);
+		
+		return  response;
 	}
 
 	public String toString(InputStream in){
@@ -41,7 +63,7 @@ public class Response {
 		InputStream in = null;
 		try {
 			URL url = new URL(get_url);
-			System.out.println("Tentando acessar: "+get_url);
+			Log.d("Response","Tentando acessar: "+get_url);
 			URLConnection conn = url.openConnection();
 			conn.connect();
 			/* conn. */

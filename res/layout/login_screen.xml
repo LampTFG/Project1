@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+	style="@style/page" >
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom" >
+        <TextView
+            android:id="@+id/lblLoginScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Login Screen" 
+            style="@style/title" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+ 
+        <TextView
+            android:id="@+id/lblUser"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            style="@style/label"
+            android:text="User:" />
+     
+        <EditText
+            android:id="@+id/edtUser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:hint="user"
+            android:text="fmammoli@gmail.com"
+            style="@style/input"
+            android:background="@drawable/round_button"
+            android:paddingLeft="10dp" />
+ 
+    </LinearLayout>
+ 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:paddingTop="5dp">
+ 
+        <TextView
+            android:id="@+id/lblPass"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            style="@style/label"
+            android:text="Pass:" />
+     
+        <EditText
+            android:id="@+id/edtPass"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:hint="pass"
+            style="@style/input"
+            android:background="@drawable/round_button"
+            android:paddingLeft="10dp"
+            android:text="12345"
+            android:password="true" />
+ 
+    </LinearLayout>
+ 
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="fill_parent"
+        android:layout_height="78dp"
+        android:layout_gravity="bottom" >
+         
+        <Button
+            android:id="@+id/btnConfirmar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:onClick="checkLogin"
+            android:text="Confirm" />
+         <Button
+            android:id="@+id/tbn_send_to_registration_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:onClick="sendToRegistration"
+            android:text="Sign up" />
+    </LinearLayout>
+ 
+</LinearLayout>
