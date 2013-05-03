@@ -33,6 +33,12 @@ public class Welcome extends Activity  {
 		fillProfileInfo();
 	}
 	
+	@Override
+	public void onResume(){
+		super.onResume();
+		populateGallery();
+	}
+	
 	private void fillProfileInfo() {
 		TextView fullName = (TextView)findViewById(R.id.fullName);
 		fullName.setText(App.getUser().getFirstname()+" "+App.getUser().getLastname());
@@ -45,11 +51,6 @@ public class Welcome extends Activity  {
         mListView.setAdapter(a);
         mAdapter.add("https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash3/549445_455717007829988_666626422_n.jpg");
         //mAdapter.add(App.getUser().getImagePath());
-	}
-
-	public void onResume(){
-		super.onResume();
-		populateGallery();
 	}
 
 	private void populateGallery() {
