@@ -119,18 +119,23 @@ public class DBConn2 extends SQLiteOpenHelper {
 	}
 
 	public SQLiteDatabase getDatabase() {
+		SQLiteDatabase dbw=null;
 		try {
 			// Verificando se o banco já foi criado e, se não foi, o mesmo será criado.
 			createDataBase();
 
 			// Abrindo database
 			String path = DBPATH;
-
-			return SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+			dbw=SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+			return dbw;
 		} catch (Exception e) {
 			// Se não conseguir copiar o banco um novo será retornado
 			System.err.println("Exception"+e.getMessage());
 			return getWritableDatabase();
+		
+		} finally {
+			if(dbw!=null)
+				dbw.close();
 		}
 
 	}

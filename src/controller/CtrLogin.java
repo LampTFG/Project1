@@ -2,9 +2,13 @@ package controller;
 
 import java.util.concurrent.ExecutionException;
 
+import dataBase.DBConn2;
+
 import model.User;
 import utils.CustomerRequester;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 /*
@@ -26,6 +30,7 @@ public class CtrLogin {
 			
 			if(regUser != null){
 				Log.d("CtrLogin", "user is valid!");
+				//addUserLocalBase(context, regUser);
 				return regUser;
 			}
 		} catch (InterruptedException e) {
@@ -37,5 +42,14 @@ public class CtrLogin {
 		}
 		
 		return null;
+	}
+
+	private void addUserLocalBase(Context context, User u) {
+		DBConn2 conn = new DBConn2(context);
+		SQLiteDatabase db2 = conn.getDatabase();
+		ContentValues initialValues = new ContentValues();
+		initialValues.put("username", u.getLogin());
+		initialValues.put("password", u.getPass());
+		db2.insert("User", null, initialValues);
 	}
 }
