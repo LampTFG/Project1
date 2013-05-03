@@ -24,7 +24,6 @@ public class ProductShow extends Activity {
 		setContentView(R.layout.activity_product_show);
 		
 		String prodID = getIntent().getStringExtra("product_id");
-		System.out.println("prod id "+prodID);
 		setProduct(prodID);
 	}
 
@@ -54,8 +53,9 @@ public class ProductShow extends Activity {
 		TextView priceTv = (TextView) findViewById(R.id.price_tv);
 		priceTv.setText(String.valueOf(product.getPrice()));
 		
-		//TextView longDescTv = (TextView) findViewById(R.id.long_description_tv);
-		//longDescTv.setText(android.text.Html.fromHtml(product.getLongDesc()));
+		TextView longDescTv = (TextView) findViewById(R.id.long_description_tv);
+		longDescTv.setText(android.text.Html.fromHtml(product.getLongDesc()));
+		
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
