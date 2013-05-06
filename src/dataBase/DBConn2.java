@@ -6,23 +6,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBConn2 extends SQLiteOpenHelper {
 
-	public final static int DATABASE_VERSION = 1;
-	public final static String DATABASE_NAME = "lampDB";
-
-	// /////////
-	/**
-	 * Este é o endereço onde o android salva os bancos de dados criado pela
-	 * aplicação, /data/data/<namespace da aplicacao>/databases/
-	 */
-	private static String DBPATH;
-
-	private Context context;
+	private static String DB_PATH;
+	private static String DB_NAME = "lampDB";
+	private SQLiteDatabase myDataBase;
+    private final Context myContext;
 
 	/**
 	 * O construtor necessita do contexto da aplicação
@@ -33,110 +27,122 @@ public class DBConn2 extends SQLiteOpenHelper {
 		 * o nome do banco de dados O terceiro é um pondeiro para manipulação de
 		 * dados, não precisaremos dele. O quarto é a versão do banco de dados
 		 */
-		super(context, DATABASE_NAME, null, 1);
-		this.context = context;
-		DBPATH = context.getDatabasePath(DATABASE_NAME).getPath();
+		super(context, DB_NAME, null, 1);
+		this.myContext = context;
+		DB_PATH = context.getDatabasePath(DB_NAME).getPath();
 	}
 
-	/**
-	 * Os métodos onCreate e onUpgrade precisam ser sobreescrito
-	 */
+	 /**
+     * Creates a empty database on the system and rewrites it with your own database.
+     * */
+    public void createDataBase() throws IOException{
+ 
+    	boolean dbExist = checkDataBase();
+ 
+    	if(dbExist){
+    		//do nothing - database already exist
+    	}else{
+ 
+    		//By calling this method and empty database will be created into the default system path
+               //of your application so we are gonna be able to overwrite that database with our database.
+        	this.getReadableDatabase();
+ 
+        	try {
+ 
+    			copyDataBase();
+ 
+    		} catch (IOException e) {
+    			System.out.println("ddd "+e.getMessage());
+        		throw new Error("Error copying database");
+ 
+        	}
+    	}
+ 
+    }
+ 
+    /**
+     * Check if the database already exist to avoid re-copying the file each time you open the application.
+     * @return true if it exists, false if it doesn't
+     */
+    private boolean checkDataBase(){
+ 
+    	SQLiteDatabase checkDB = null;
+ 
+    	try{
+    		String myPath = DB_PATH;
+    		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+ 
+    	}catch(SQLiteException e){
+ 
+    		//database does't exist yet.
+ 
+    	}
+ 
+    	if(checkDB != null){
+ 
+    		checkDB.close();
+ 
+    	}
+ 
+    	return checkDB != null ? true : false;
+    }
+ 
+    /**
+     * Copies your database from your local assets-folder to the just created empty database in the
+     * system folder, from where it can be accessed and handled.
+     * This is done by transfering bytestream.
+     * */
+    private void copyDataBase() throws IOException{
+ 
+    	//Open your local db as the input stream
+    	InputStream myInput = myContext.getAssets().open(DB_NAME);
+ 
+    	// Path to the just created empty db
+    	String outFileName = DB_PATH;
+ 
+    	//Open the empty db as the output stream
+    	OutputStream myOutput = new FileOutputStream(outFileName);
+ 
+    	//transfer bytes from the inputfile to the outputfile
+    	byte[] buffer = new byte[1024];
+    	int length;
+    	while ((length = myInput.read(buffer))>0){
+    		myOutput.write(buffer, 0, length);
+    	}
+ 
+    	//Close the streams
+    	myOutput.flush();
+    	myOutput.close();
+    	myInput.close();
+ 
+    }
+ 
+    public void openDataBase() throws SQLException{
+    	//Open the database
+        String myPath = DB_PATH;
+    	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+    }
+ 
+    @Override
+	public synchronized void close() {
+    	    if(myDataBase != null)
+    		    myDataBase.close();
+ 
+    	    super.close();
+	}
+ 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+ 
 	}
+ 
 	@Override
-	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+ 
 	}
-
-	public void Close(SQLiteDatabase db) {
-		db.close();
-		super.close();
-	}
-
-	/**
-	 * Método auxiliar que verifica a existencia do banco da aplicação.
-	 */
-	private boolean checkDataBase() {
-		SQLiteDatabase db = null;
-		try {
-			String path = DBPATH;
-			db = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.NO_LOCALIZED_COLLATORS);
-			db.close();
-		} catch (SQLiteException e) {
-			System.err.println("ERRO: "+e.getMessage());
-			// Database not found
-		}
-		return db != null;
-	}
-
-	private void createDataBase() throws Exception {
-
-		// Primeiro temos que verificar se o banco da aplicação
-		// já foi criado
-		boolean exists = checkDataBase();
-
-		if (!exists) {
-			// Chamaremos esse método para que o android
-			// crie um banco vazio e o diretório onde iremos copiar
-			// no banco que está no assets.
-			this.getWritableDatabase();
-
-			// Se o banco de dados não existir iremos copiar o nosso
-			// arquivo em /assets para o local onde o android os salva
-			try {
-				copyDatabase();
-			} catch (IOException e) {
-				throw new Error("Não foi possível copiar o arquivo");
-			}
-
-		}
-	}
-
-	/**
-	 * Esse método é responsável por copiar o banco do diretório assets para o
-	 * diretório padrão do android.
-	 */
-	private void copyDatabase() throws IOException {
-
-		String dbPath = DBPATH;
-
-		// Abre o arquivo o destino para copiar o banco de dados
-		OutputStream dbStream = new FileOutputStream(dbPath);
-
-		// Abre Stream do nosso arquivo que esta no assets
-		InputStream dbInputStream = context.getAssets().open("lampDB");
-
-		byte[] buffer = new byte[1024];
-		int length;
-		while ((length = dbInputStream.read(buffer)) > 0) {
-			dbStream.write(buffer, 0, length);
-		}
-
-		dbInputStream.close();
-
-		dbStream.flush();
-		dbStream.close();
-	}
-
-	public SQLiteDatabase getDatabase() {
-		SQLiteDatabase dbw=null;
-		try {
-			// Verificando se o banco já foi criado e, se não foi, o mesmo será criado.
-			createDataBase();
-
-			// Abrindo database
-			String path = DBPATH;
-			dbw=SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.NO_LOCALIZED_COLLATORS);
-			return dbw;
-		} catch (Exception e) {
-			// Se não conseguir copiar o banco um novo será retornado
-			System.err.println("Exception"+e.getMessage());
-			return getWritableDatabase();
-		
-		} finally {
-			if(dbw!=null)
-				dbw.close();
-		}
-
-	}
+ 
+        // Add your public helper methods to access and get content from the database.
+       // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
+       // to you to create adapters for your views.
+ 
 }
