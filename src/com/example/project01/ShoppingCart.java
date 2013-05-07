@@ -34,6 +34,10 @@ public class ShoppingCart extends Activity {
 		return true;
 	}
 	
+	public void onClick(View v){
+		
+	}
+	
 	private void populateTable() {
 		TableLayout tl = (TableLayout) findViewById(R.id.tableShoppingCart);
         TableRow tr;
