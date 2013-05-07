@@ -1,5 +1,8 @@
 package com.example.project01;
 
+import java.io.IOException;
+
+import dataBase.DBConn2;
 import utils.DialogManager; 
 import utils.Functions;
 import utils.Vars;
@@ -30,7 +33,21 @@ public class Welcome extends Activity  {
 	protected synchronized void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.telaboasvindas);
+		//creating database
+		try {
+			DBConn2 conn = new DBConn2(this);
+			conn.createDataBase();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//filling profile
 		fillProfileInfo();
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		populateGallery();
 	}
 	
 	private void fillProfileInfo() {
@@ -45,11 +62,6 @@ public class Welcome extends Activity  {
         mListView.setAdapter(a);
         mAdapter.add("https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash3/549445_455717007829988_666626422_n.jpg");
         //mAdapter.add(App.getUser().getImagePath());
-	}
-
-	public void onResume(){
-		super.onResume();
-		populateGallery();
 	}
 
 	private void populateGallery() {
