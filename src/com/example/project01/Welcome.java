@@ -1,5 +1,8 @@
 package com.example.project01;
 
+import java.io.IOException;
+
+import dataBase.DBConn2;
 import utils.DialogManager; 
 import utils.Functions;
 import utils.Vars;
@@ -30,6 +33,14 @@ public class Welcome extends Activity  {
 	protected synchronized void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.telaboasvindas);
+		//creating database
+		try {
+			DBConn2 conn = new DBConn2(this);
+			conn.createDataBase();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//filling profile
 		fillProfileInfo();
 	}
 	
