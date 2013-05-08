@@ -54,7 +54,7 @@ public class ProductShow extends Activity {
 		priceTv.setText(String.valueOf(product.getPrice()));
 		
 		TextView longDescTv = (TextView) findViewById(R.id.long_description_tv);
-		longDescTv.setText(android.text.Html.fromHtml(product.getLongDesc()));
+		//longDescTv.setText(android.text.Html.fromHtml(product.getLongDesc()));
 		
 	}
 	@Override
