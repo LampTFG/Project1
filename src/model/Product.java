@@ -1,14 +1,15 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;
 
 @Root(name="prestashop")
+@Namespace(reference="http://www.w3.org/1999/xlink")
 public class Product implements Serializable{
 	/**
 	 * 
@@ -22,17 +23,18 @@ public class Product implements Serializable{
 	@Element
 	@Path("products/product")
 	private float price;
-	
+	//Nao consegui fazer a leitura do xml com o simple framewokr, por isso os comentarios
+	//@Path(value="products/product/description_short")
 	//@Element(name="language")
-	//@Path("products/product/description_short[1]")
 	private String shortDesc;
 	
+	
+	//@Path(value="products/product/description")
 	//@Element(name="language")
-	//@Path("products/product/description[1]")
 	private String longDesc;
 	
+	//@Path(value="products/product/name")
 	//@Element(name="language")
-	//@Path("products/product/name[1]")
 	private String name;
 	
 	@Attribute(name="href")

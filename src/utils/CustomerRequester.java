@@ -1,6 +1,7 @@
 package utils;
 
 import java.io.InputStream;
+import java.io.StringWriter;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
