@@ -27,10 +27,9 @@ public class LogInScreen extends Activity{
         // Edits
     	String edtUser = ((EditText) findViewById(R.id.edtUser)).getText().toString();
 		String edtPass = ((EditText) findViewById(R.id.edtPass)).getText().toString();
-		User u = new User(edtUser, Functions.md5(edtPass));
 		CtrLogin ctr = new CtrLogin();
 		Intent i = new Intent(Views.welcomeIntent);
-		User regUser = ctr.validateUser(getApplicationContext(), u); 
+		User regUser = ctr.getUser(getApplicationContext(), edtUser, Functions.md5(edtPass)); 
 		if(regUser!=null){
 			App.setUser(regUser);
 		}

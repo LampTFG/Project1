@@ -73,15 +73,15 @@ public class XMLParser2 {
 			if(name.equals("id")){
 				productID = readTag(parser,"id");
 			}else if(name.equals("name")){
-				productName = readInnerTag(parser, name);
+				productName = readLanguageTag(parser, name);
 			}else if(name.equals("description")){
-				longDesc = readInnerTag(parser, name);
+				longDesc = readLanguageTag(parser, name);
 			}else if(name.equals("description_short")){
-				shortDesc = readInnerTag(parser, name);
+				shortDesc = readLanguageTag(parser, name);
 			}else if(name.equals("price")){
 				price = readTag(parser,"price");
-			}else if(name.equals("association")){
-				imagePath = readInnerTag(parser, "image");
+			}else if(name.equals("associations")){
+				imagePath = readSubItem(parser,"images", "image");
 			}else{
 				skip(parser);
 			}
@@ -89,8 +89,22 @@ public class XMLParser2 {
 		return new Product(Integer.parseInt(productID),Float.parseFloat(price), shortDesc,longDesc,productName, imagePath);
 	}
 	
+	private String readSubItem(XmlPullParser parser, String ... tag) throws XmlPullParserException, IOException {
+		int cont=0;
+		String resp = "";
+		while(parser.next() != XmlPullParser.END_DOCUMENT && cont<tag.length){
+			if(parser.getName()!=null && parser.getName().equals(tag[cont])){
+				cont++;
+				if(cont==tag.length){
+					resp = parser.getAttributeValue(0);
+				}
+			}
+		}
+		return resp;
+	}
+
 	//Used to read an inner tag named language, it always read the first language
-	private String readInnerTag(XmlPullParser parser, String tag) throws XmlPullParserException, IOException {
+	private String readLanguageTag(XmlPullParser parser, String tag) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, tag);
 		String prodName = null;
 			
@@ -108,7 +122,7 @@ public class XMLParser2 {
 		}
 		return prodName;
 	}
-		
+			
 	//Read customer data from XML
 	private User readCustomer(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, "customer");
@@ -143,7 +157,7 @@ public class XMLParser2 {
 		else
 			return new User(customerID,passwd,firstname,lastname, email);
 	}
-	//Read the tag id
+	//Read the tag
 	private String readTag(XmlPullParser parser, String tag) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, ns, tag);
 		String id = readText(parser);
@@ -196,6 +210,4 @@ public class XMLParser2 {
 	        }
 	    }
 	 }
-	
-	
 }

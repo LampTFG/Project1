@@ -4,19 +4,23 @@ import java.util.concurrent.ExecutionException;
 
 import utils.ProductRequester;
 import utils.session.App;
+import utils.urlimageviewhelper.MyAdapter;
+import utils.urlimageviewhelper.MyGridAdapter;
 import model.Product;
 import model.ShopItem;
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class ProductShow extends Activity {
 	Product product;
+	private MyAdapter mAdapter;
+	private ListView mListView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +34,10 @@ public class ProductShow extends Activity {
 	private void setProduct(String prodID){
 		try {
 			product = new ProductRequester().execute(prodID).get();
-			Log.d("Product Show", product.toString());
 			setProductInfos();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -56,6 +57,13 @@ public class ProductShow extends Activity {
 		TextView longDescTv = (TextView) findViewById(R.id.long_description_tv);
 		longDescTv.setText(android.text.Html.fromHtml(product.getLongDesc()));
 		
+		//product Image
+		mListView = (ListView)findViewById(R.id.productImage);
+        mAdapter = new MyAdapter(this);
+        MyGridAdapter a = new MyGridAdapter(mAdapter, this);
+        mListView.setAdapter(a);
+        mAdapter.add(product.getImagePath());
+        System.out.println("Image: "+product.getImagePath());
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
