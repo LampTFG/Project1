@@ -1,33 +1,40 @@
 package model;
 
+import java.io.Serializable;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;
 
 @Root(name="prestashop")
-public class User {
+public class User implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Element
-	@Path("customer")
+	@Path("customers/customer")
 	private String id;
 	
 	@Element(name="passwd")
-	@Path("customer")
+	@Path("customers/customer")
 	private String pass;
 	
 	@Element(name="imagePath")
-	@Path("customer")
+	@Path("customers/customer")
 	private String imagePath;
 	
 	@Element
-	@Path("customer")
+	@Path("customers/customer")
 	private String firstname;
 	@Element
-	@Path("customer")
+	@Path("customers/customer")
 	private String lastname;
 	
 	@Element
-	@Path("customer")
+	@Path("customers/customer")
 	private String email;
 	
 
