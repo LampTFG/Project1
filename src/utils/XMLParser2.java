@@ -43,7 +43,6 @@ public class XMLParser2 {
 				continue;
 			}
 			String name = parser.getName();
-			System.out.println("XMLParser2 readPrestashop getName: "+ parser.getName());
 			if(name.equals("customers")){//when you resquest a user by email
 				entries.add(readCustomers(parser));
 			}else if(name.equals("customer")){//when you request a user by id
@@ -123,7 +122,6 @@ public class XMLParser2 {
 				continue;
 			}
 			String name = parser.getName();
-			//System.out.println("readCustomer parser getName: "+ parser.getName());
 			if(name.equals("id")){
 				customerID = readTag(parser,"id");
 			}else if(name.equals("firstname")){

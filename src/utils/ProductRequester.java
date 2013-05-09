@@ -53,7 +53,6 @@ public class ProductRequester extends AsyncTask<String, Void, Product> {
 	
 	private void find(String id) throws Exception {
 		findProductSimple(id);
-		System.out.println(product);
 	}
 	
 	private String getJSONTag(Document xml, String tag) {
