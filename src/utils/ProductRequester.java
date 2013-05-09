@@ -34,13 +34,13 @@ public class ProductRequester extends AsyncTask<String, Void, Product> {
 		Document doc = db.parse(new InputSource(url.openStream()));
 		doc.getDocumentElement().normalize();
 		//collecting strings
-		String id_product = getJSONTag(doc, "id_product");
-		String name = getJSONTag(doc, "name");
-		String description_short = getJSONTag(doc, "description_short");
-		String description = getJSONTag(doc, "description");
-		String id_image = getJSONTag(doc, "id_image");
-		String active = getJSONTag(doc, "active");
-		String price = getJSONTag(doc, "price");
+		String id_product = getXMLTag(doc, "id_product");
+		String name = getXMLTag(doc, "name");
+		String description_short = getXMLTag(doc, "description_short");
+		String description = getXMLTag(doc, "description");
+		String id_image = getXMLTag(doc, "id_image");
+		String active = getXMLTag(doc, "active");
+		String price = getXMLTag(doc, "price");
 		//seting product
 		product = new Product();
 		product.setId(id_product);
@@ -55,7 +55,7 @@ public class ProductRequester extends AsyncTask<String, Void, Product> {
 		findProductSimple(id);
 	}
 	
-	private String getJSONTag(Document xml, String tag) {
+	private String getXMLTag(Document xml, String tag) {
 		return xml.getElementsByTagName(tag).item(0).getTextContent();
 	}
 }
