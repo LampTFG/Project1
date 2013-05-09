@@ -8,7 +8,6 @@ import model.Product;
 import model.ShopItem;
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -30,7 +29,6 @@ public class ProductShow extends Activity {
 	private void setProduct(String prodID){
 		try {
 			product = new ProductRequester().execute(prodID).get();
-			Log.d("Product Show", product.toString());
 			setProductInfos();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -54,7 +52,7 @@ public class ProductShow extends Activity {
 		priceTv.setText(String.valueOf(product.getPrice()));
 		
 		TextView longDescTv = (TextView) findViewById(R.id.long_description_tv);
-		//longDescTv.setText(android.text.Html.fromHtml(product.getLongDesc()));
+		longDescTv.setText(android.text.Html.fromHtml(product.getLongDesc()));
 		
 	}
 	@Override
@@ -68,7 +66,7 @@ public class ProductShow extends Activity {
 		EditText qtyed = (EditText) findViewById(R.id.product_quantity_ed);
 		
 		ShopItem si = new ShopItem(product.getId(),
-				Integer.parseInt(qtyed.getText().toString()), product.getPrice());
+				Integer.parseInt(qtyed.getText().toString()), 1);
 		
 		App.getCart().addItem(si);
 		

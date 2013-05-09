@@ -1,22 +1,18 @@
 package utils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream.GetField;
-import java.io.OutputStream;
-import java.util.List;
+import java.net.URL;
 
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.PersistenceException;
-import org.simpleframework.xml.core.Persister;
-import org.xmlpull.v1.XmlPullParserException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 
 import android.os.AsyncTask;
 import model.Product;
 
 public class ProductRequester extends AsyncTask<String, Void, Product> {
-	
+
 	Product product;
 
 	@Override
@@ -29,66 +25,38 @@ public class ProductRequester extends AsyncTask<String, Void, Product> {
 		}
 		return product;
 	}
-	//Use this method while simple framework is not 100% working for products
-	private void findProduct(String id){
-		String filters = "filter[id]="+id;
-		String display = "display=full";
-		Response res = new Response(Functions.urlConcat(Vars.wsServer, 
-				Vars.wsProductPath + "/?ws_key="+ Vars.wsKey+"&"+filters+"&"+display));
-		InputStream i = res.getResponse();
-		XMLParser2 parser = new XMLParser2();
-		try {
-			List<Object> entries = parser.parse(i, XMLParser2.GET_PRODUCT_BY_ID);
-			product = (Product) entries.get(0);
-		} catch (XmlPullParserException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+	// Use this method when simple framework is 100%
+	private void findProductSimple(String id) throws Exception {
+		URL url = new URL(Vars.lampWS+"/products.php?key=" + Vars.wsKey+"&id="+id);
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder db = dbf.newDocumentBuilder();
+		Document doc = db.parse(new InputSource(url.openStream()));
+		doc.getDocumentElement().normalize();
+		//collecting strings
+		String id_product = getJSONTag(doc, "id_product");
+		String name = getJSONTag(doc, "name");
+		String description_short = getJSONTag(doc, "description_short");
+		String description = getJSONTag(doc, "description");
+		String id_image = getJSONTag(doc, "id_image");
+		String active = getJSONTag(doc, "active");
+		String price = getJSONTag(doc, "price");
+		//seting product
+		product = new Product();
+		product.setId(id_product);
+		product.setName(name);
+		product.setLongDesc(description);
+		product.setShortDesc(description_short);
+		product.setImagePath(id_image);
+		product.setPrice(price);
 	}
 	
-	/*Use this method when simple framework is 100%
-	private void findProduct(String id) throws Exception{
-		product = new Product();
-		String filters = "filter[id]="+id;
-		String display = "display=[id,description,description_short,price,name,id_default_image]";
-		Response res = new Response(Functions.urlConcat(Vars.wsServer, 
-				Vars.wsProductPath + "/?ws_key="+ Vars.wsKey+"&"+filters+"&"+display));
-		InputStream in = res.getResponse();
-		Serializer serializer = new Persister();
-		//Essa parte eh soh para teste, depois de arrumar o simple framework pode tirar
-		product.setId(1);
-		product.setImagePath("path");
-		product.setName("name");
-		product.setLongDesc("long");
-		product.setShortDesc("short");
-		/*product.setPrice(10);
-		 OutputStream output = new OutputStream()
-		    {
-		        private StringBuilder string = new StringBuilder();
-		        @Override
-		        public void write(int b) throws IOException {
-		            this.string.append((char) b );
-		        }
-
-		        //Netbeans IDE automatically overrides this toString()
-		        public String toString(){
-		            return this.string.toString();
-		        }
-		    };
-		serializer.write(product, output);
-		System.out.println("Requester: "+output.toString());
-		
-		try{
-			serializer.read(product, in,false);
-		}catch(PersistenceException pe){
-			System.out.println(pe.getMessage());
-		}
-		
-	}*/
-
-	private void find(String id) throws Exception{
-		findProduct(id);
+	private void find(String id) throws Exception {
+		findProductSimple(id);
+		System.out.println(product);
 	}
-
+	
+	private String getJSONTag(Document xml, String tag) {
+		return xml.getElementsByTagName(tag).item(0).getTextContent();
+	}
 }

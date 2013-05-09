@@ -2,44 +2,17 @@ package model;
 
 import java.io.Serializable;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Namespace;
-import org.simpleframework.xml.Path;
-import org.simpleframework.xml.Root;
-
-@Root(name="prestashop")
-@Namespace(reference="http://www.w3.org/1999/xlink")
 public class Product implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	@Element
-	@Path("products/product")
 	private int id;
-	
-	@Element
-	@Path("products/product")
-	private float price;
-	//Nao consegui fazer a leitura do xml com o simple framewokr, por isso os comentarios
-	//@Path(value="products/product/description_short")
-	//@Element(name="language")
 	private String shortDesc;
-	
-	
-	//@Path(value="products/product/description")
-	//@Element(name="language")
 	private String longDesc;
-	
-	//@Path(value="products/product/name")
-	//@Element(name="language")
 	private String name;
-	
-	@Attribute(name="href")
-	@Path("products/product/id_default_image")
 	private String imagePath;
+	private float price;
 	
 	
 	public Product() {
@@ -50,7 +23,6 @@ public class Product implements Serializable{
 			String name, String imagePath) {
 		super();
 		this.id = id;
-		this.price = price;
 		this.shortDesc = shortDesc;
 		this.longDesc = longDesc;
 		this.name = name;
@@ -59,7 +31,7 @@ public class Product implements Serializable{
 
 	public String toString(){
 		return "ID: "+this.id+"/nName: "+this.name+"/nShort Description: "+this.shortDesc+
-				"/nLong Description: "+this.longDesc+"/nPrice: "+this.price;
+				"/nLong Description: "+this.longDesc+"/n";
 	}
 	
 	public String getName() {
@@ -74,11 +46,8 @@ public class Product implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public float getPrice() {
-		return price;
-	}
-	public void setPrice(float price) {
-		this.price = price;
+	public void setId(String id) {
+		this.id = id != null ? Integer.parseInt(id):-1;
 	}
 	public String getShortDesc() {
 		return shortDesc;
@@ -100,5 +69,16 @@ public class Product implements Serializable{
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
 	
+	public void setPrice(String price) {
+		this.price = price != null ? Float.parseFloat(price):0;
+	}
 }
