@@ -82,6 +82,11 @@ public class ShoppingCart extends Activity {
         	tl.addView(tr, tableParams);
         }
 	}
+	
+	public void showPayment(View v){
+		Intent i = new Intent(Views.paymentIntent);
+		ShoppingCart.this.startActivity(i);
+	}
 
 	public void back(View v){
 		Intent i = new Intent(Views.welcomeIntent);

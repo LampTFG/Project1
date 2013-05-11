@@ -2,20 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+import utils.Vars;
+
 public class Cart {
 
-	private int idUser;
-	private ArrayList<ShopItem> cart;
-	
-	public Cart(){
-		cart = new ArrayList<ShopItem>();
-	}
-	public int getIdUser() {
-		return idUser;
-	}
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
-	}
+	private ArrayList<ShopItem> cart = new ArrayList<ShopItem>();
 	
 	public ArrayList<ShopItem> getCart() {
 		return cart;
@@ -42,4 +33,20 @@ public class Cart {
 		cart.clear();
 	}
 	
+	public float getTotalPrice(){
+		float total = 0;
+		for (int i=0;i<cart.size();i++)
+			total += cart.get(i).getPrice()*cart.get(i).getQtd();
+		return total + Vars.extraFee;
+	}
+	
+	@Override
+	public String toString() {
+		String resp = "";
+		resp += "id   qtd   price\n";
+		for (int i=0;i<cart.size();i++)
+			resp += cart.get(i).getIdProd() +"    "+ cart.get(i).getQtd()+"      "+cart.get(i).getPrice()+"\n";
+		resp += "\n\nExtra fee: "+Vars.extraFee+"\n";
+		return resp;
+	}	
 }

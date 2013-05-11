@@ -7,6 +7,17 @@
     android:orientation="vertical" 
     android:background="@drawable/round_button"
     android:layout_margin="5dp">
+    <LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	    <Button
+	        android:id="@+id/add_product_to_cart"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:onClick="onClick"
+	        android:text="Add to Cart"/>
+	</LinearLayout>
 	<LinearLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
@@ -116,16 +127,6 @@
 	        <requestFocus />
 	    </EditText>
 	</LinearLayout>
-	<LinearLayout
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical" >
-	    <Button
-	        android:id="@+id/add_product_to_cart"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:onClick="onClick"
-	        android:text="Add to Cart"/>
-	</LinearLayout>
+	
 	
 </LinearLayout>

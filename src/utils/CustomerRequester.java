@@ -30,7 +30,7 @@ public class CustomerRequester extends AsyncTask<String, Void, User>{
 		InputStream i = res.getResponse();
 		XMLParser2 parser = new XMLParser2();
 		try {
-			List entries = parser.parse(i, XMLParser2.GET_CUSTOMER_BY_ID);
+			List<Object> entries = parser.parse(i, XMLParser2.GET_CUSTOMER_BY_ID);
 			//user = entries.size()>0 ? (User) entries.get(0):null;
 			user = (User) entries.get(0);
 		} catch (XmlPullParserException e) {
