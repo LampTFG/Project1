@@ -1,16 +1,12 @@
 package utils;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.io.InputStream;
-import java.io.StringWriter;
 import java.util.List;
 
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import model.User;
 
 public class CustomerRequester extends AsyncTask<String, Void, User>{
@@ -21,7 +17,6 @@ public class CustomerRequester extends AsyncTask<String, Void, User>{
 		try {
 			find(params[0],params[1]);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return user;

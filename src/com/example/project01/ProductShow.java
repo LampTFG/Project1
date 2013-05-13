@@ -2,6 +2,7 @@ package com.example.project01;
 
 import java.util.concurrent.ExecutionException;
 
+import utils.DialogManager;
 import utils.ProductRequester;
 import utils.session.App;
 import utils.urlimageviewhelper.MyAdapter;
@@ -12,10 +13,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ProductShow extends Activity {
 	Product product;
@@ -73,15 +72,12 @@ public class ProductShow extends Activity {
 	}
 	
 	public void onClick(View v){
-		EditText qtyed = (EditText) findViewById(R.id.product_quantity_ed);
 		
-		ShopItem si = new ShopItem(product.getId(),
-				Integer.parseInt(qtyed.getText().toString()), 1);
+		ShopItem si = new ShopItem(product.getId(),1, 1);
 		
 		App.getCart().addItem(si);
 		
-		Toast toast = Toast.makeText(this, product.getName()+" adicionado ao carrinho.",Toast.LENGTH_SHORT);
-		toast.show();
+		DialogManager.showToastMessage(this, product.getName()+" adicionado ao carrinho.");
 		
 		ProductShow.this.finish();
 	}
