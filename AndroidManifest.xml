@@ -12,7 +12,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -26,7 +26,6 @@
             android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -36,7 +35,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.example.project01.LogInScreen" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -46,7 +44,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.example.project01.welcome" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -56,7 +53,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.example.project01.ScanScreen" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -66,7 +62,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.example.project01.HistoryScreen" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -76,7 +71,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.example.project01.ShoppingCart" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -86,7 +80,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.example.project01.ProductShow" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -95,9 +88,20 @@
             android:label="@string/title_activity_customer_registration" >
             <intent-filter>
                 <action android:name="com.example.project01.CustomerRegistration" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.project01.Payment"
+            android:label="@string/title_activity_payment" >
+            <intent-filter>
+                <action android:name="com.example.project01.Payment" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.paypal.android.MEP.PayPalActivity"
+            android:label="@string/title_activity_payment" >
         </activity>
     </application>
 

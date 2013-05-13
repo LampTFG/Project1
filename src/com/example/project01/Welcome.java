@@ -99,7 +99,7 @@ public class Welcome extends Activity  {
 		Intent i = new Intent(Views.shoppingCartIntent);
 		Welcome.this.startActivity(i);
 	}
-
+	
 	public void scanQRCode(View v) {
 		if(Functions.isConnected(this)){
 			IntentIntegrator integrator = new IntentIntegrator(this);

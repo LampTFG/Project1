@@ -3,6 +3,7 @@ package utils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.Toast;
 
 public class DialogManager {
 	/**
@@ -23,6 +24,11 @@ public class DialogManager {
 			           }
 			       });
 		builder.show();
+	}
+	
+	public static void showToastMessage(Activity act, String message) {
+		Toast toast = Toast.makeText(act, message, Toast.LENGTH_SHORT);
+		toast.show();
 	}
 	
 	/**
