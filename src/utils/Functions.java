@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import model.Cart;
@@ -27,7 +28,6 @@ public class Functions {
 			resp += strings[i] + ((strings[i].endsWith("/")) ? "" : "/");
 		}
 		resp += strings[strings.length - 1];
-		System.out.println("Functions#urlConcat-urlString: " + resp);
 		return resp;
 	}
 
@@ -124,6 +124,8 @@ public class Functions {
 	public static boolean isConnected(Context context) {
 		try {
 			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo ni = cm.getActiveNetworkInfo();
+			System.out.println("Connection? "+ni.isConnected());
 			if (cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected()) {
 				Log.d("Connection",
 						"Status de conexão 3G: "

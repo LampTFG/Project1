@@ -17,6 +17,9 @@ public class Vars {
 	public static String wsCustomersPath = "store/api/customers";
 	public static String wsProductPath = "store/api/products";
 	
+	//LampWS
+	public static String lampWS = wsServer+"store/lampWS";
+	
 	//editProfile
 	public static String editProfile = "http://www.site1366132944.hospedagemdesites.ws/store/index.php?controller=authentication&back=my-account";
 	

@@ -8,11 +8,11 @@ public class Product implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private float price;
 	private String shortDesc;
 	private String longDesc;
 	private String name;
 	private String imagePath;
+	private float price;
 	
 	
 	public Product() {
@@ -23,7 +23,6 @@ public class Product implements Serializable{
 			String name, String imagePath) {
 		super();
 		this.id = id;
-		this.price = price;
 		this.shortDesc = shortDesc;
 		this.longDesc = longDesc;
 		this.name = name;
@@ -32,7 +31,7 @@ public class Product implements Serializable{
 
 	public String toString(){
 		return "ID: "+this.id+"/nName: "+this.name+"/nShort Description: "+this.shortDesc+
-				"/nLong Description: "+this.longDesc+"/nPrice: "+this.price;
+				"/nLong Description: "+this.longDesc+"/n";
 	}
 	
 	public String getName() {
@@ -47,11 +46,8 @@ public class Product implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public float getPrice() {
-		return price;
-	}
-	public void setPrice(float price) {
-		this.price = price;
+	public void setId(String id) {
+		this.id = id != null ? Integer.parseInt(id):-1;
 	}
 	public String getShortDesc() {
 		return shortDesc;
@@ -73,5 +69,16 @@ public class Product implements Serializable{
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
 	
+	public void setPrice(String price) {
+		this.price = price != null ? Float.parseFloat(price):0;
+	}
 }
