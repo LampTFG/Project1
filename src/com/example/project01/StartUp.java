@@ -5,8 +5,6 @@ import utils.Views;
 
 import com.example.project01.util.SystemUiHider;
 
-import controller.CtrStartUp;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;

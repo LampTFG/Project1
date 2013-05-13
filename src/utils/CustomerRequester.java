@@ -1,10 +1,13 @@
 package utils;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -34,9 +37,16 @@ public class CustomerRequester extends AsyncTask<String, Void, User>{
 				Vars.wsCustomersPath + "/?ws_key="+ Vars.wsKey+"&"+filters+"&"+display));
 		//String response = res.getResponse().toString();
 		InputStream i = res.getResponse();
-		Serializer serializer = new Persister();
-		user = serializer.read(User.class, i);
-		Log.d("Customer Requester",": requested customer: "+user.toString());
+		XMLParser2 parser = new XMLParser2();
+		try {
+			List<Object> entries = parser.parse(i, XMLParser2.GET_CUSTOMER_BY_ID);
+			//user = entries.size()>0 ? (User) entries.get(0):null;
+			user = (User) entries.get(0);
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void find(String email, String passwd) throws Exception{

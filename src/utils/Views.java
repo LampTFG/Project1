@@ -10,5 +10,6 @@ public class Views {
 	public static String welcomeIntent = "com.example.project01.welcome";
 	public static String productShowIntent = "com.example.project01.ProductShow";
 	public static String customerRegistrationIntent = "com.example.project01.CustomerRegistration";
+	public static String paymentIntent = "com.example.project01.Payment";
 	
 }
