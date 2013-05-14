@@ -84,7 +84,7 @@ public class Payment extends Activity {
 		case Activity.RESULT_OK:
 			String payKey = data.getStringExtra(PayPalActivity.EXTRA_PAY_KEY);
 			DialogManager.showToastMessage(this,"Success! Your paykey is: "+payKey);
-			new CtrShop().finalizeShop();
+			new CtrShop().finalizeShop(this);
 			break;
 		case Activity.RESULT_CANCELED:
 			DialogManager.showToastMessage(this,"Payment canceled");

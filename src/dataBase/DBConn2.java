@@ -10,6 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBConn2 extends SQLiteOpenHelper {
 
@@ -30,6 +31,7 @@ public class DBConn2 extends SQLiteOpenHelper {
 		super(context, DB_NAME, null, 1);
 		this.myContext = context;
 		DB_PATH = context.getDatabasePath(DB_NAME).getPath();
+		Log.d("DBConn2", "DB PATH: "+DB_PATH);
 	}
 
 	 /**

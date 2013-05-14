@@ -1,11 +1,13 @@
 package model;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 public class ShopItem {
 	private int idProd;
 	private int qtd;
 	private float price;
+	private  Date dateShop;
 	
 	public ShopItem(int idProd, int qtd, float price) {
 		super();
@@ -13,7 +15,27 @@ public class ShopItem {
 		this.qtd = qtd;
 		this.price = price;
 	}
+	public ShopItem(int idProd, int qtd, float price, Date date) {
+		super();
+		this.idProd = idProd;
+		this.qtd = qtd;
+		this.price = price;
+		this.dateShop = date;
+	}
 
+
+	public Date getDateShop() {
+		return dateShop;
+	}
+
+
+	public void setDateShop() {
+		this.dateShop = new Date();
+	}
+	
+	public void setDateShop(Date date) {
+		this.dateShop = date;
+	}
 
 	public float getPrice() {
 		return price;
