@@ -2,9 +2,11 @@ package com.example.project01;
 
 import java.util.ArrayList;
 
+import model.History;
 import model.ShopItem;
 import utils.FunctionsView;
 import utils.Views;
+import utils.session.App;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -51,7 +53,8 @@ public class HistoryScreen extends Activity {
         tr = new TableRow(this);
     	tr.setLayoutParams(tableParams);
         
-        ArrayList<ShopItem> list = getHistory();
+    	History history = App.getHistory();
+    	ArrayList<ShopItem> list = history.getShopItems();
         //descomente as linhas abaixo para teste
         //list = new ArrayList<ShopItem>();
         //list.add(new ShopItem(7, 3));
@@ -63,9 +66,9 @@ public class HistoryScreen extends Activity {
 	        	tr = new TableRow(this);
 	        	tr.setLayoutParams(tableParams);
 	        	//
-	        	tv = FunctionsView.makeTableView(this,"aaaa",i);
+	        	tv = FunctionsView.makeTableView(this,String.valueOf(list.get(i).getIdProd()),i);
 	        	tr.addView(tv);
-	        	tv = FunctionsView.makeTableView(this,"bbbb",i);
+	        	tv = FunctionsView.makeTableView(this,String.valueOf(list.get(i).getPrice()),i);
 	        	tr.addView(tv);
 	        	tv = FunctionsView.makeTableView(this,"xx/xx/xx",i);
 	            tr.addView(tv);
@@ -76,10 +79,6 @@ public class HistoryScreen extends Activity {
         	tr = FunctionsView.getEmptyRow(this); 
         	tl.addView(tr, tableParams);
         }
-	}
-	
-	private ArrayList<ShopItem> getHistory() {
-		return new ArrayList<ShopItem>();
 	}
 
 	public void back(View v){

@@ -81,6 +81,7 @@ public class CtrLogin {
 		    if(cursor.getCount()>0)
 		    	id = cursor.getInt(0);
 	    }
+	    cursor.close();
 	    db.close();
 	    return id;
 	}
@@ -95,8 +96,10 @@ public class CtrLogin {
 	    if (cursor != null){
 	    	cursor.moveToFirst();
 		    if(cursor.getCount()>0){
-		    	u = new User(username,password);
+		    	int id =cursor.getShort(cursor.getColumnIndexOrThrow("_id"));
+		    	u = new User(username,password, String.valueOf(id));
 		    }
+		    cursor.close();
 	    }
 	    db.close();
 	    return u;

@@ -101,7 +101,7 @@ public class User implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "User [login=" + email + ", pass=" + pass + "]";
+		return "User [id="+id+"login=" + email + ", pass=" + pass + "]";
 	}
 	@Override
 	public boolean equals(Object o) {
