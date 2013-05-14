@@ -50,9 +50,8 @@ public class DBConn2 extends SQLiteOpenHelper {
         	this.getReadableDatabase();
  
         	try {
- 
+        		Log.d("DBConn2", "Trying to copry database from assests");
     			copyDataBase();
- 
     		} catch (IOException e) {
     			System.out.println("ddd "+e.getMessage());
         		throw new Error("Error copying database");

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import dataBase.DBConn2;
@@ -25,6 +26,14 @@ public class CtrLogin {
 	
 	public User getUser(Context context, String username, String pass){
 		User regUser = null;
+		try {
+			DBConn2 db = new DBConn2(context);
+			db.createDataBase();
+			db.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 			if(Functions.isConnected(context)){
 				//checking in the remote base
@@ -74,7 +83,7 @@ public class CtrLogin {
 	    SQLiteDatabase db = conn.getReadableDatabase();
 	    int id = -1;
 	 
-	    Cursor cursor = db.query("user", new String[] { "_id"}, "username = ?",
+	    Cursor cursor = db.query("User", new String[] { "_id"}, "username = ?",
 	            new String[] { username }, null, null, null, null);
 	    if (cursor != null){
 	    	cursor.moveToFirst();
