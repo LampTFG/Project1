@@ -39,7 +39,9 @@ public class CustomerRequester extends AsyncTask<String, Void, User>{
 		InputStream i = res.getResponse();
 		XMLParser2 parser = new XMLParser2();
 		try {
+			Log.d("Customer Requester", "trying to parse");
 			List<Object> entries = parser.parse(i, XMLParser2.GET_CUSTOMER_BY_ID);
+			Log.d("Customer Requester", "parsed");
 			//user = entries.size()>0 ? (User) entries.get(0):null;
 			user = (User) entries.get(0);
 		} catch (XmlPullParserException e) {

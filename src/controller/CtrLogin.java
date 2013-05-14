@@ -27,14 +27,6 @@ public class CtrLogin {
 	public User getUser(Context context, String username, String pass){
 		User regUser = null;
 		try {
-			DBConn2 db = new DBConn2(context);
-			db.createDataBase();
-			db.close();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
 			if(Functions.isConnected(context)){
 				//checking in the remote base
 				regUser = new CustomerRequester().execute(username, pass).get();

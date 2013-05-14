@@ -37,12 +37,8 @@ public class Welcome extends Activity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.telaboasvindas);
 		//creating database
-		try {
-			DBConn2 conn = new DBConn2(this);
-			conn.createDataBase();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+		//conn.createDataBase();
 		//filling profile
 		fillProfileInfo();
 		//load History from local DB

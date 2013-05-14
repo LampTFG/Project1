@@ -21,7 +21,7 @@ public class CtrHistory {
 	    SQLiteDatabase db = conn.getReadableDatabase();
 	    //History history = null;
 	    Log.d("CtrHistory laodlocalHistory", "reading stuff");
-	    Cursor cursor = db.query("History", new String[] { "_id", "idProd", "dateShop"}, "idUser = ?",
+	    Cursor cursor = db.query("History", new String[] { "_id", "idProd", "price","dateShop"}, "idUser = ?",
 	            new String[] { user.getId()}, null, null, null, null);
 	    if (cursor != null){
 	    	cursor.moveToFirst();

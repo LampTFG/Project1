@@ -9,6 +9,7 @@ import utils.session.App;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import controller.CtrLogin;
@@ -29,7 +30,9 @@ public class LogInScreen extends Activity{
 		String edtPass = ((EditText) findViewById(R.id.edtPass)).getText().toString();
 		CtrLogin ctr = new CtrLogin();
 		Intent i = new Intent(Views.welcomeIntent);
-		User regUser = ctr.getUser(getApplicationContext(), edtUser, Functions.md5(edtPass)); 
+		Log.d("Login Screen", "check login");
+		User regUser = ctr.getUser(getApplicationContext(), edtUser, Functions.md5(edtPass));
+		Log.d("Login Screen", "user checked");
 		if(regUser!=null){
 			App.setUser(regUser);
 		}
