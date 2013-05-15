@@ -2,12 +2,15 @@ package com.example.project01;
 
 import java.util.ArrayList;
 
+import model.History;
 import model.ShopItem;
 import utils.FunctionsView;
 import utils.Views;
+import utils.session.App;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TableLayout;
@@ -51,23 +54,20 @@ public class HistoryScreen extends Activity {
         tr = new TableRow(this);
     	tr.setLayoutParams(tableParams);
         
-        ArrayList<ShopItem> list = getHistory();
-        //descomente as linhas abaixo para teste
-        //list = new ArrayList<ShopItem>();
-        //list.add(new ShopItem(7, 3));
-        //list.add(new ShopItem(2, 6));
-        //
-        
+    	History history = App.getHistory();
+    	ArrayList<ShopItem> list = history.getShopItems();
+    	Log.d("Hisotry Screen", "adding row to table: "+list.size());
         if(list!=null && list.size()>0){
 	        for (int i=0;i< list.size(); i++) {
+	        	Log.d("Hisotry Screen", "adding row to table"+ list.get(i).getIdProd());
 	        	tr = new TableRow(this);
 	        	tr.setLayoutParams(tableParams);
 	        	//
-	        	tv = FunctionsView.makeTableView(this,"aaaa",i);
+	        	tv = FunctionsView.makeTableView(this,String.valueOf(list.get(i).getIdProd()),i);
 	        	tr.addView(tv);
-	        	tv = FunctionsView.makeTableView(this,"bbbb",i);
+	        	tv = FunctionsView.makeTableView(this,String.valueOf(list.get(i).getPrice()),i);
 	        	tr.addView(tv);
-	        	tv = FunctionsView.makeTableView(this,"xx/xx/xx",i);
+	        	tv = FunctionsView.makeTableView(this,String.valueOf(list.get(i).getDateShop()),i);
 	            tr.addView(tv);
 	            //
 	            tl.addView(tr,tableParams);
@@ -76,10 +76,6 @@ public class HistoryScreen extends Activity {
         	tr = FunctionsView.getEmptyRow(this); 
         	tl.addView(tr, tableParams);
         }
-	}
-	
-	private ArrayList<ShopItem> getHistory() {
-		return new ArrayList<ShopItem>();
 	}
 
 	public void back(View v){

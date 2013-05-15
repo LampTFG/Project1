@@ -76,7 +76,7 @@ public class ProductShow extends Activity {
 		EditText qtyed = (EditText) findViewById(R.id.product_quantity_ed);
 		
 		ShopItem si = new ShopItem(product.getId(),
-				Integer.parseInt(qtyed.getText().toString()), 1);
+				Integer.parseInt(qtyed.getText().toString()), product.getPrice());
 		
 		App.getCart().addItem(si);
 		

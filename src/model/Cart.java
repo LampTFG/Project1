@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import utils.Vars;
 
 public class Cart {
@@ -18,6 +20,7 @@ public class Cart {
 		cart.add(new ShopItem(idProd, qtd, price));
 	}
 	public void addItem(ShopItem si){
+		Log.d("Cart Model", "Adding SI to cart: "+si.getIdProd());
 		cart.add(si);
 	}
 	public void editItem(int idProd, int qtd){

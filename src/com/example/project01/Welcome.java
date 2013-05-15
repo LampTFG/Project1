@@ -2,6 +2,8 @@ package com.example.project01;
 
 import java.io.IOException;
 
+import controller.CtrHistory;
+
 import dataBase.DBConn2;
 import utils.DialogManager; 
 import utils.Functions;
@@ -16,6 +18,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
@@ -34,16 +37,20 @@ public class Welcome extends Activity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.telaboasvindas);
 		//creating database
-		try {
-			DBConn2 conn = new DBConn2(this);
-			conn.createDataBase();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 		//filling profile
 		fillProfileInfo();
+		//load History from local DB
+		fillHistory();
 	}
 	
+	private void fillHistory() {
+		Log.d("Welcome: fillhistory", "user: "+App.getUser().toString());
+		//This line to populate History
+		//CtrHistory.addHistoryItem(this);
+		CtrHistory.loadLocalHistory(App.getUser(), this);
+	}
+
 	@Override
 	public void onResume(){
 		super.onResume();
@@ -51,6 +58,7 @@ public class Welcome extends Activity  {
 	}
 	
 	private void fillProfileInfo() {
+		Log.d("Welcome: ", "filling profile info");
 		TextView fullName = (TextView)findViewById(R.id.fullName);
 		fullName.setText(App.getUser().getFirstname()+" "+App.getUser().getLastname());
 		TextView email = (TextView)findViewById(R.id.emailUser);
@@ -77,6 +85,7 @@ public class Welcome extends Activity  {
 
 	public void backMainScreen(View v) {
 		Functions.logOut();
+		App.getHistory().clear();
 		Intent i = new Intent(Views.loginIntent);
 		Welcome.this.startActivity(i);
 		Welcome.this.finish();

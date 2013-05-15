@@ -10,6 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBConn2 extends SQLiteOpenHelper {
 
@@ -30,15 +31,16 @@ public class DBConn2 extends SQLiteOpenHelper {
 		super(context, DB_NAME, null, 1);
 		this.myContext = context;
 		DB_PATH = context.getDatabasePath(DB_NAME).getPath();
+		Log.d("DBConn2", "DB PATH: "+DB_PATH);
 	}
 
 	 /**
      * Creates a empty database on the system and rewrites it with your own database.
      * */
     public void createDataBase() throws IOException{
- 
+    	
     	boolean dbExist = checkDataBase();
- 
+    	Log.d("DBConn2", "CreatingDB, existis? "+dbExist);
     	if(dbExist){
     		//do nothing - database already exist
     	}else{
@@ -46,11 +48,10 @@ public class DBConn2 extends SQLiteOpenHelper {
     		//By calling this method and empty database will be created into the default system path
                //of your application so we are gonna be able to overwrite that database with our database.
         	this.getReadableDatabase();
- 
+        	
         	try {
- 
+        		Log.d("DBConn2", "Trying to copry database from assests");
     			copyDataBase();
- 
     		} catch (IOException e) {
     			System.out.println("ddd "+e.getMessage());
         		throw new Error("Error copying database");
@@ -133,7 +134,10 @@ public class DBConn2 extends SQLiteOpenHelper {
  
 	@Override
 	public void onCreate(SQLiteDatabase db) {
- 
+		Log.d("DBConn2", "Migration Tables");
+		db.execSQL(TableScripts.CREATE_TABLE_USER);
+		db.execSQL(TableScripts.CREATE_TABLE_PRODUCT);
+		db.execSQL(TableScripts.CREATE_HISTORY_TABLE);
 	}
  
 	@Override

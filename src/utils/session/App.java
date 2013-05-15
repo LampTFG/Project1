@@ -1,6 +1,7 @@
 package utils.session;
 
 import model.Cart;
+import model.History;
 import model.User;
 
 import android.app.Application;
@@ -9,6 +10,7 @@ public class App extends Application {
 
 	private static User logedUser;
 	private static Cart cart = new Cart();
+	private static History history = new History();
 
 	public static Cart getCart() {
 		return cart;
@@ -30,4 +32,12 @@ public class App extends Application {
 		return App.logedUser;	
 	}
 
+	public static History getHistory() {
+		return history;
+	}
+
+	public static void setHistory(History history) {
+		App.history = history;
+	}
+	
 }

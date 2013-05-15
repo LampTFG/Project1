@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import dataBase.DBConn2;
@@ -74,13 +75,14 @@ public class CtrLogin {
 	    SQLiteDatabase db = conn.getReadableDatabase();
 	    int id = -1;
 	 
-	    Cursor cursor = db.query("user", new String[] { "_id"}, "username = ?",
+	    Cursor cursor = db.query("User", new String[] { "_id"}, "username = ?",
 	            new String[] { username }, null, null, null, null);
 	    if (cursor != null){
 	    	cursor.moveToFirst();
 		    if(cursor.getCount()>0)
 		    	id = cursor.getInt(0);
 	    }
+	    cursor.close();
 	    db.close();
 	    return id;
 	}
@@ -95,8 +97,10 @@ public class CtrLogin {
 	    if (cursor != null){
 	    	cursor.moveToFirst();
 		    if(cursor.getCount()>0){
-		    	u = new User(username,password);
+		    	int id =cursor.getShort(cursor.getColumnIndexOrThrow("_id"));
+		    	u = new User(username,password, String.valueOf(id));
 		    }
+		    cursor.close();
 	    }
 	    db.close();
 	    return u;
