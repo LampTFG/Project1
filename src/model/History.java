@@ -3,10 +3,11 @@ package model;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import android.util.Log;
+
 public class History{
 	private ArrayList<ShopItem> shopItems = new ArrayList<ShopItem>();
 	private int idUser;
-	private Date dateShop;
 	
 	
 	public ArrayList<ShopItem> getShopItems() {
@@ -21,15 +22,14 @@ public class History{
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
-	public Date getDateShop() {
-		return dateShop;
-	}
-	public void setDateShop(Date dateShop) {
-		this.dateShop = dateShop;
+		
+	public void addShopItem(ShopItem shopItem){
+		Log.d("History Model", "add item: "+shopItem.getIdProd());
+		this.shopItems.add(shopItem);
 	}
 	
-	public void addShopItem(ShopItem shopItem){
-		this.shopItems.add(shopItem);
+	public void clear(){
+		shopItems.clear();
 	}
 	
 }

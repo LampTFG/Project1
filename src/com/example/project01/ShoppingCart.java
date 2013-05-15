@@ -56,11 +56,6 @@ public class ShoppingCart extends Activity {
         Cart cart = App.getCart();
         
         ArrayList<ShopItem> list = cart.getCart();
-        //descomente as linhas abaixo para teste
-        //list = new ArrayList<ShopItem>();
-        //list.add(new ShopItem(7, 3));
-        //list.add(new ShopItem(2, 6));
-        //
         
         if(list!=null){
 	        for (int i=0;i< list.size(); i++) {

@@ -19,18 +19,20 @@ public class CtrHistory {
 	static public void loadLocalHistory(User user,Context context){
 		DBConn2 conn = new DBConn2(context);
 	    SQLiteDatabase db = conn.getReadableDatabase();
-	    //History history = null;
-	    Log.d("CtrHistory laodlocalHistory", "reading stuff");
+
+	    Log.d("CtrHistory laodlocalHistory", "reading stuff Cart sieze"+ App.getCart().getCart().size());
 	    Cursor cursor = db.query("History", new String[] { "_id", "idProd", "price","dateShop"}, "idUser = ?",
 	            new String[] { user.getId()}, null, null, null, null);
 	    if (cursor != null){
 	    	cursor.moveToFirst();
 		    if(cursor.getCount()>0){
+		    	Log.d("Ctr History", "cursorCount: "+cursor.getCount());
 		    	do{
 			    	int id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
 			    	int idProd = cursor.getInt(cursor.getColumnIndexOrThrow("idProd"));
 			    	float price  = cursor.getFloat(cursor.getColumnIndexOrThrow("price"));
 			    	Date date = new Date(cursor.getShort(cursor.getColumnIndexOrThrow("dateShop")));
+			    	Log.d("Ctr History", "reading from db _id:" +id+" idProd"+idProd);
 			    	App.getHistory().addShopItem(new ShopItem(idProd,1,price,date));
 			    			
 		    	}while(cursor.moveToNext());
@@ -42,23 +44,24 @@ public class CtrHistory {
 	}
 	
 	public static void addHistoryItems(ArrayList<ShopItem> items, Context context){
-		Log.d("CtrHistory additems", "Adding a list to history");
+		Log.d("CtrHistory additems", "Adding a list to history, size: "+items.size());
 		for(int i=0;i<items.size();i++){
 			addHistoryItem(items.get(i), context);
 		}
+		App.getHistory().clear();
 	}
 	
 	public static void addHistoryItem(ShopItem item,Context context){
-		Log.d("CtrHistory additem", "adding row to history");
+		Log.d("CtrHistory additem", "adding row to history: "+item.getIdProd());
 		App.getHistory().addShopItem(item);
 		DBConn2 conn = new DBConn2(context);
 	    SQLiteDatabase db = conn.getWritableDatabase();
 	    
 	    ContentValues values = new ContentValues();
-	    values.put("idProd", 1);
-	    values.put("idUser", 2);
-	    //values.put("total", 12.5);
-	    values.put("dateShop", "13/05/2013");
+	    values.put("idProd", item.getIdProd());
+	    values.put("idUser", App.getUser().getId());
+	    values.put("price", item.getPrice());
+	    values.put("dateShop", item.getDateShop().toString());
 	    
 	    db.insert("History", null, values);
 	    

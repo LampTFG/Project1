@@ -38,7 +38,6 @@ public class Welcome extends Activity  {
 		setContentView(R.layout.telaboasvindas);
 		//creating database
 		
-		//conn.createDataBase();
 		//filling profile
 		fillProfileInfo();
 		//load History from local DB
@@ -86,6 +85,7 @@ public class Welcome extends Activity  {
 
 	public void backMainScreen(View v) {
 		Functions.logOut();
+		App.getHistory().clear();
 		Intent i = new Intent(Views.loginIntent);
 		Welcome.this.startActivity(i);
 		Welcome.this.finish();

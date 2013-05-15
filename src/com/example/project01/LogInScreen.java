@@ -52,9 +52,4 @@ public class LogInScreen extends Activity{
 		}else
 			DialogManager.notOnlineUser(this);
 	}
-	
-	public void showPayment(View v){
-		Intent i = new Intent(Views.paymentIntent);
-		LogInScreen.this.startActivity(i);
-	}
 }

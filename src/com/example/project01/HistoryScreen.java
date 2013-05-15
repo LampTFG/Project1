@@ -10,6 +10,7 @@ import utils.session.App;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TableLayout;
@@ -55,14 +56,10 @@ public class HistoryScreen extends Activity {
         
     	History history = App.getHistory();
     	ArrayList<ShopItem> list = history.getShopItems();
-        //descomente as linhas abaixo para teste
-        //list = new ArrayList<ShopItem>();
-        //list.add(new ShopItem(7, 3));
-        //list.add(new ShopItem(2, 6));
-        //
-        
+    	Log.d("Hisotry Screen", "adding row to table: "+list.size());
         if(list!=null && list.size()>0){
 	        for (int i=0;i< list.size(); i++) {
+	        	Log.d("Hisotry Screen", "adding row to table"+ list.get(i).getIdProd());
 	        	tr = new TableRow(this);
 	        	tr.setLayoutParams(tableParams);
 	        	//
@@ -70,7 +67,7 @@ public class HistoryScreen extends Activity {
 	        	tr.addView(tv);
 	        	tv = FunctionsView.makeTableView(this,String.valueOf(list.get(i).getPrice()),i);
 	        	tr.addView(tv);
-	        	tv = FunctionsView.makeTableView(this,"xx/xx/xx",i);
+	        	tv = FunctionsView.makeTableView(this,String.valueOf(list.get(i).getDateShop()),i);
 	            tr.addView(tv);
 	            //
 	            tl.addView(tr,tableParams);
